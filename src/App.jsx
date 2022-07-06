@@ -7,21 +7,24 @@ import Navbar from "./components/Navbar";
 function App() {
   return (
     <>
-      <div className="bg-primary text-center mx-auto">Hello for all pages</div>;
-      <div className="container">
-        <Navbar />
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="products">
-              <Route index element={<div>Products</div>} />
-              <Route path=":productId" element={<div>Product details</div>} />
+      <Navbar>
+        <div className="bg-primary text-center mx-auto">
+          Hello for all pages
+        </div>
+        <div className="container">
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="products">
+                <Route index element={<div>Products</div>} />
+                <Route path=":productId" element={<div>Product details</div>} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </div>
+          </Routes>
+        </div>
+      </Navbar>
     </>
   );
 }

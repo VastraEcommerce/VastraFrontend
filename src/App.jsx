@@ -3,14 +3,12 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
     <>
       <Navbar>
-        <div className="bg-primary text-center mx-auto">
-          Hello for all pages
-        </div>
         <div className="container">
           <Routes>
             <Route path="/">
@@ -19,7 +17,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="products">
                 <Route index element={<div>Products</div>} />
-                <Route path=":productId" element={<div>Product details</div>} />
+                <Route path=":productId" element={<ProductDetails />} />
               </Route>
             </Route>
           </Routes>

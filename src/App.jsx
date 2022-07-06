@@ -1,14 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
-import NavBar from './components/Navbar.jsx';
-import ProductDetails from './pages/ProductDetails.jsx';
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Navbar from './components/Navbar';
+import ProductDetails from './pages/ProductDetails';
+
 function App() {
   return (
     <>
-      <NavBar />
       <div className="container">
+        <Navbar />
         <Routes>
           <Route path="/">
-            <Route index element={<div>Home Page</div>} />
+            <Route index element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
             <Route path="products">
               <Route index element={<div>Products</div>} />
               <Route path=":productId" element={<ProductDetails />} />

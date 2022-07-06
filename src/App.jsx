@@ -11,7 +11,6 @@ function App() {
       <div className="container">
         <Navbar />
         <Routes>
-          <Navbar />
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="/contact" element={<Contact />} />

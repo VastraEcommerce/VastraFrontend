@@ -5,92 +5,93 @@ import { BiShoppingBag } from "react-icons/bi";
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
 import SwitchColors from "../Product/SwitchColors";
 
+// const color = ["#999966", " #E6B333"];
 export default function ProductCard() {
-  const dataCard = [
-    {
-      brand: "Deon_Halvorson98",
-      title: "April.Runolfsdottir",
-      category: "T-shirts",
-      variants: [
-        {
-          size: "S",
-          price: 42,
-          color: " #E6B333",
-          count: 54,
-        },
-        {
-          size: "XXL",
-          price: 62,
-          color: " #999966",
-          count: 77,
-        },
-        {
-          size: "L",
-          price: 10,
-          color: "#FFB399",
-          count: 67,
-        },
-        {
-          size: "L",
-          price: 11,
-          color: "#991AFF",
-          count: 49,
-        },
-        {
-          size: "XXL",
-          price: 26,
-          color: " #3366E6",
-          count: 31,
-        },
-        {
-          size: "XL",
-          price: 44,
-          color: " #9900B3",
-          count: 76,
-        },
-        {
-          size: "S",
-          price: 64,
-          color: "#CC80CC ",
-          count: 47,
-        },
-      ],
-      description: "Ulices71",
-      ratingsAverage: 1,
-      brand_thumbnail: "Milan.Collier69",
-      ratingsQuantity: 16,
-    },
-    {
-      brand: "Adrain_Labadie",
-      title: "Brendan80",
-      category: " T-shirts",
-      variants: [
-        {
-          size: "L",
-          price: 33,
-          color: " #991AFF",
-          count: 56,
-        },
-        {
-          size: "XL",
-          price: 31,
-          color: " #B3B31A",
-          count: 38,
-        },
-        {
-          size: "M",
-          price: 74,
-          color: " #9900B3",
-          count: 28,
-        },
-      ],
-      description: "Pink_Smith42",
-      ratingsAverage: 1,
-      brand_thumbnail: "Ronaldo44",
-      ratingsQuantity: 27,
-    },
-  ];
-  console.log(dataCard);
+  // const dataCard = [
+  //   {
+  //     brand: "Deon_Halvorson98",
+  //     title: "April.Runolfsdottir",
+  //     category: "T-shirts",
+  //     variants: [
+  //       {
+  //         size: "S",
+  //         price: 42,
+  //         color: " #E6B333",
+  //         count: 54,
+  //       },
+  //       {
+  //         size: "XXL",
+  //         price: 62,
+  //         color: " #999966",
+  //         count: 77,
+  //       },
+  //       {
+  //         size: "L",
+  //         price: 10,
+  //         color: "#FFB399",
+  //         count: 67,
+  //       },
+  //       {
+  //         size: "L",
+  //         price: 11,
+  //         color: "#991AFF",
+  //         count: 49,
+  //       },
+  //       {
+  //         size: "XXL",
+  //         price: 26,
+  //         color: " #3366E6",
+  //         count: 31,
+  //       },
+  //       {
+  //         size: "XL",
+  //         price: 44,
+  //         color: " #9900B3",
+  //         count: 76,
+  //       },
+  //       {
+  //         size: "S",
+  //         price: 64,
+  //         color: "#CC80CC ",
+  //         count: 47,
+  //       },
+  //     ],
+  //     description: "Ulices71",
+  //     ratingsAverage: 1,
+  //     brand_thumbnail: "Milan.Collier69",
+  //     ratingsQuantity: 16,
+  //   },
+  //   {
+  //     brand: "Adrain_Labadie",
+  //     title: "Brendan80",
+  //     category: " T-shirts",
+  //     variants: [
+  //       {
+  //         size: "L",
+  //         price: 33,
+  //         color: " #991AFF",
+  //         count: 56,
+  //       },
+  //       {
+  //         size: "XL",
+  //         price: 31,
+  //         color: " #B3B31A",
+  //         count: 38,
+  //       },
+  //       {
+  //         size: "M",
+  //         price: 74,
+  //         color: " #9900B3",
+  //         count: 28,
+  //       },
+  //     ],
+  //     description: "Pink_Smith42",
+  //     ratingsAverage: 1,
+  //     brand_thumbnail: "Ronaldo44",
+  //     ratingsQuantity: 27,
+  //   },
+  // ];
+  // console.log(dataCard);
   return (
     <div
       className='container py-5
@@ -110,12 +111,12 @@ export default function ProductCard() {
             <span className='text-2lg'>$600.00</span>
           </p>
           <div className='colors flex justify-around w-[50%] mt-1'>
-           <SwitchColors />
-            {/* <div className='w-[1.2rem] h-[1.2rem] border border-neutral rounded-full bg-red-100 hover:border-neutral '></div>
+            {/* <SwitchColors color={color} /> */}
+            <div className='w-[1.2rem] h-[1.2rem] border border-neutral rounded-full bg-red-100 hover:border-neutral '></div>
             <div className='w-[1.2rem] h-[1.2rem] border border-light rounded-full bg-orange-100 hover:border-neutral'></div>
             <div className='w-[1.2rem] h-[1.2rem] border border-light rounded-full bg-lime-100 hover:border-neutral'></div>
             <div className='w-[1.2rem] h-[1.2rem] border border-light rounded-full bg-green-100 hover:border-neutral'></div>
-            <div className='w-[1.2rem] h-[1.2rem] border border-light rounded-full bg-amber-100 hover:border-neutral'></div> */}
+            <div className='w-[1.2rem] h-[1.2rem] border border-light rounded-full bg-amber-100 hover:border-neutral'></div>
           </div>
           <div className='productSize flex justify-around w-[60%] text-center mt-1'>
             <div className='w-[2rem] h-[2rem] border border-light hover:border-neutral '>

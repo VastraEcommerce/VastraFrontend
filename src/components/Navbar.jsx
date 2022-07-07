@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-const Navbar = () => {
-  return <div></div>;
-};
-=======
-import { MdSearch } from "react-icons/md";
-import { HiOutlineShoppingCart } from "react-icons/hi";
-import { HiMenuAlt2 } from "react-icons/hi";
-import { Logo } from "./Logo";
-import { Link } from "react-router-dom";
->>>>>>> 7f94bedc5691e4c1def05c07f4058e3ce5e816ae
+import { MdSearch } from 'react-icons/md';
+import { HiOutlineShoppingCart } from 'react-icons/hi';
+import { HiMenuAlt2 } from 'react-icons/hi';
+import { Logo } from './Logo';
+import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
   return (

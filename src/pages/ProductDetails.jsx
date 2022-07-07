@@ -23,7 +23,7 @@ export default function ProductDetails() {
           </div>
           <h1 className="text-xl lg:text-2xl">{'Skinny mid-rise trousers'}</h1>
           <div className="border-black flex justify-center lg:justify-start gap-x-2">
-            <RateStars size={25} />
+            <RateStars size={25} readOnly />
             <span className="underline uppercase font-thin">{'3 reviews'}</span>
           </div>
           <div>
@@ -42,6 +42,8 @@ export default function ProductDetails() {
               colors={colors}
               onChangeColorStateHandler={setColor}
               currentColorState={color}
+              circleSize={25}
+              className="px-2 py-1 gap-6"
             />
           </div>
           <div>
@@ -50,6 +52,8 @@ export default function ProductDetails() {
               sizes={sizes}
               onChangeSizeStateHandler={setSize}
               currentSizeState={size}
+              boxSize={10}
+              className="py-2 px-1 gap-x-3"
             />
           </div>
         </div>

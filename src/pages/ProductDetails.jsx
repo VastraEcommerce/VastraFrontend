@@ -42,6 +42,8 @@ export default function ProductDetails() {
               colors={colors}
               onChangeColorStateHandler={setColor}
               currentColorState={color}
+              circleSize={25}
+              className="px-2 py-1 gap-6"
             />
           </div>
           <div>
@@ -50,6 +52,8 @@ export default function ProductDetails() {
               sizes={sizes}
               onChangeSizeStateHandler={setSize}
               currentSizeState={size}
+              boxSize={10}
+              className="py-2 px-1 gap-x-3"
             />
           </div>
         </div>

@@ -2,9 +2,13 @@ export default function SwitchColors({
   colors = [],
   onChangeColorStateHandler = (colorValue = '') => {},
   currentColorState = '',
+  circleSize = 20,
+  className = '',
 }) {
   return (
-    <div className="flex flex-wrap justify-center lg:justify-start gap-5 py-2 px-1">
+    <div
+      className={`flex flex-wrap justify-center lg:justify-start gap-2 ${className}`}
+    >
       {colors.map((color) => (
         <button
           key={color}
@@ -16,7 +20,11 @@ export default function SwitchColors({
               ? 'shadow ring-2 hover:ring-2 scale-105 '
               : ''
           } `}
-          style={{ backgroundColor: color }}
+          style={{
+            backgroundColor: color,
+            width: circleSize,
+            height: circleSize,
+          }}
         ></button>
       ))}
     </div>

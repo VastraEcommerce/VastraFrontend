@@ -17,6 +17,7 @@ export default function SwitchSizes({
           onClick={() => onChangeSizeStateHandler(size)}
           style={{
             padding: boxSize,
+            minWidth: `${boxSize + 20}px`,
             outline:
               size === currentSizeState
                 ? 'solid 1.65px black'

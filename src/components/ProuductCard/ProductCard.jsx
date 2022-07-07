@@ -89,7 +89,7 @@ export default function ProductCard() {
               colors={colors}
               onChangeColorStateHandler={setColor}
               currentColorState={color}
-              circleSize='1.2rem'
+              circleSize={"1.2rem"}
             />
           </div>
           <div className='productSize flex justify-between w-[100%] text-center mb-4'>

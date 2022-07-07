@@ -3,7 +3,7 @@ import img from "./PlaceholderImage/Capture.PNG";
 import { Link } from "react-router-dom";
 import { BiShoppingBag } from "react-icons/bi";
 import { BsSuitHeart, BsSuitHeartFill } from "react-icons/bs";
-import ColorsComponent from "./ColorsComponent/ColorsComponent";
+import SwitchColors from "../Product/SwitchColors";
 
 export default function ProductCard() {
   const dataCard = [
@@ -110,9 +110,7 @@ export default function ProductCard() {
             <span className='text-2lg'>$600.00</span>
           </p>
           <div className='colors flex justify-around w-[50%] mt-1'>
-            {dataCard.map((product, index) => (
-              <ColorsComponent product={product} key={index} />
-            ))}
+           <SwitchColors />
             {/* <div className='w-[1.2rem] h-[1.2rem] border border-neutral rounded-full bg-red-100 hover:border-neutral '></div>
             <div className='w-[1.2rem] h-[1.2rem] border border-light rounded-full bg-orange-100 hover:border-neutral'></div>
             <div className='w-[1.2rem] h-[1.2rem] border border-light rounded-full bg-lime-100 hover:border-neutral'></div>

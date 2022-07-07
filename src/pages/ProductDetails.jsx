@@ -23,7 +23,7 @@ export default function ProductDetails() {
           </div>
           <h1 className="text-xl lg:text-2xl">{'Skinny mid-rise trousers'}</h1>
           <div className="border-black flex justify-center lg:justify-start gap-x-2">
-            <RateStars size={25} />
+            <RateStars size={25} readOnly />
             <span className="underline uppercase font-thin">{'3 reviews'}</span>
           </div>
           <div>

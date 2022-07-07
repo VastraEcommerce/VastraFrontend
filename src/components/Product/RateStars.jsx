@@ -9,7 +9,7 @@ export default function RateStars({
 }) {
   return (
     <ReactStars
-      edit={readOnly}
+      edit={!readOnly}
       count={5}
       size={size}
       filledIcon={<FaStar />}

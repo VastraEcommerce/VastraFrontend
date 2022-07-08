@@ -1,7 +1,12 @@
+import { useState } from 'react';
 import RateStars from '../components/Product/RateStars';
 import SwitchColors from '../components/Product/SwitchColors';
+import SwitchSizes from '../components/Product/SwitchSizes';
 const colors = ['#fff', '#f00', '#0f0', '#00f'];
+const sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
 export default function ProductDetails() {
+  const [size, setSize] = useState(sizes[0]);
+  const [color, setColor] = useState(colors[0]);
   return (
     <>
       <div className="capitalize text-center py-4 text-xs md:text-sm xl:text-start">
@@ -18,7 +23,7 @@ export default function ProductDetails() {
           </div>
           <h1 className="text-xl lg:text-2xl">{'Skinny mid-rise trousers'}</h1>
           <div className="border-black flex justify-center lg:justify-start gap-x-2">
-            <RateStars size={25} />
+            <RateStars size={25} readOnly />
             <span className="underline uppercase font-thin">{'3 reviews'}</span>
           </div>
           <div>
@@ -32,11 +37,24 @@ export default function ProductDetails() {
           <progress className="progress w-full" value={70} max={100}></progress>
           <hr className="my-5" />
           <div>
-            <h1 className="uppercase font-thin mb-3">Color:with</h1>
-            <SwitchColors colors={colors} />
+            <h1 className="uppercase font-thin mb-3">colors:{color}</h1>
+            <SwitchColors
+              colors={colors}
+              onChangeColorStateHandler={setColor}
+              currentColorState={color}
+              circleSize={25}
+              className="px-2 py-1 gap-6"
+            />
           </div>
           <div>
-            <h1 className="uppercase font-thin mb-3">size:{'xs'}</h1>
+            <h1 className="uppercase font-thin mb-3">sizes:{size}</h1>
+            <SwitchSizes
+              sizes={sizes}
+              onChangeSizeStateHandler={setSize}
+              currentSizeState={size}
+              boxSize={10}
+              className="py-2 px-1 gap-x-3"
+            />
           </div>
         </div>
       </div>

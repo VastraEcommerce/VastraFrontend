@@ -1,8 +1,9 @@
-import { MdSearch } from 'react-icons/md';
-import { HiOutlineShoppingCart } from 'react-icons/hi';
-import { HiMenuAlt2 } from 'react-icons/hi';
-import { Logo } from './Logo';
-import { Link } from 'react-router-dom';
+import { MdSearch } from "react-icons/md";
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { HiMenuAlt2 } from "react-icons/hi";
+import { Logo } from "./Logo";
+import { Link } from "react-router-dom";
+import Accordion from "./Accordion";
 
 const Navbar = (props) => {
   return (
@@ -13,7 +14,7 @@ const Navbar = (props) => {
 
         <div className="drawer-content contan flex flex-col">
           {/* Navbar */}
-          <div className="bg-base-100 drop-shadow-md sticky top-0">
+          <div className="bg-base-100 drop-shadow-md sticky top-0 z-[100]">
             <div className="container navbar">
               {/* mobile menu */}
               <div className="navbar-start">
@@ -120,25 +121,17 @@ const Navbar = (props) => {
         <div className="drawer-side">
           <label htmlFor="main-drawer" className="drawer-overlay" />
 
-          <div className="p-4 overflow-y-auto w-44 md:w-[25%] bg-base-100">
-            <ul className="menu bg-base-100 w-36 p-2 rounded-box">
+          <div className="p-4 overflow-y-auto w-[300px] md:w-[400px] bg-base-100">
+            <div className="menu bg-base-100 w-[90%] p-2 rounded-box mx-auto">
               {/* Sidebar content here */}
-              <li>
-                <Link to="/">WOMEN'S</Link>
-              </li>
-              <li>
-                <Link to="/">MEN'S</Link>
-              </li>
-              <li>
-                <Link to="/">KIDS</Link>
-              </li>
-              <li>
-                <Link to="/">ABOUT US</Link>
-              </li>
-              <li>
-                <Link to="/">CONTACT</Link>
-              </li>
-            </ul>
+              <SidebarItem header="HOME" to="/" />
+
+              <Accordion header="WOMEN'S" body={"asdasdasd"} />
+              <Accordion header="MEN'S" body={"asdasdasd"} />
+              <Accordion header="KIDS" body={"asdasdasd"} />
+              <SidebarItem header="CONTACT" to="contact" />
+              <SidebarItem header="ABOUT" to="about" />
+            </div>
           </div>
         </div>
       </div>
@@ -146,3 +139,13 @@ const Navbar = (props) => {
   );
 };
 export default Navbar;
+
+function SidebarItem({ header, to }) {
+  return (
+    <Link to={to}>
+      <div className=" h-12 w-full pl-5 flex items-center cursor-pointer border-b">
+        <h1 className="text-lg font-semibold ">{header}</h1>
+      </div>
+    </Link>
+  );
+}

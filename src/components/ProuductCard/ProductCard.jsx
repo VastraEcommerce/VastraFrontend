@@ -76,28 +76,26 @@ export default function ProductCard() {
         />
         <div className="ml-1">
           <div className="space-y-2">
-            <h3 className="text-xs text-neutral-100 pt-2">Dolce & Gabbana</h3>
+            <h3 className="text-xs text-light pt-2">Dolce & Gabbana</h3>
             <p className="text-xs text-neutral-500">Jersey Graphic Tee Dolce</p>
           </div>
           <p className="space-x-2 mt-1">
-            <span className="text-2lg">{size}</span>
+            <span className="text-xl">{size}</span>
           </p>
-          <div className="colors flex justify-around w-[50%] mt-1">
+          <div className="colors flex justify-between w-[100%] mt-3 mb-4">
             <SwitchColors
               colors={colors}
               onChangeColorStateHandler={setColor}
               currentColorState={color}
+              circleSize={'1.2rem'}
             />
-            {/* <div className='w-[1.2rem] h-[1.2rem] border border-neutral rounded-full bg-red-100 hover:border-neutral '></div>*/}
           </div>
-          <div className="productSize flex justify-around w-[60%] text-center mt-1">
-            {/* <div className='w-[2rem] h-[2rem] border border-light hover:border-neutral '>
-              Xxl
-            </div> */}
+          <div className="productSize flex justify-between w-[100%] text-center mb-4">
             <SwitchSizes
               sizes={sizes}
               onChangeSizeStateHandler={setSize}
               currentSizeState={size}
+              boxSize={'0.4rem'}
             />
           </div>
           <div className="flex justify-start items-center pt-3 pb-2  mt-1">
@@ -120,13 +118,7 @@ export default function ProductCard() {
             </Link>
           </div>
           <div className=" my-3">
-            {/* <input type='radio' name='rating-1' className='rating-hidden' />
-            <input
-              type='radio'
-              name='rating-1'
-              className=' mask mask-star mask-half-1'
-            /> */}
-            <RatStars size={15} value={5} />
+            <RatStars size={15} value={5} onChange={''} readOnly={true} />
           </div>
         </div>
       </div>

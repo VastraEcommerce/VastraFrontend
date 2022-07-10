@@ -45,13 +45,13 @@ export default function ImagesSlider({ images = [] }) {
           {/* preview */}
           <figure
             onMouseMove={handleMouseMove}
-            className="bg-no-repeat w-full h-full lg:w-[calc(100%-4rem)] zoom"
+            className="bg-no-repeat w-full h-full lg:w-[calc(100%-4rem)] group"
             style={zoomStyle}
           >
             <img
               src={activeImage}
               alt=""
-              className="block pointer-events-none"
+              className="block pointer-events-none group-hover:opacity-0"
             />
           </figure>
         </div>

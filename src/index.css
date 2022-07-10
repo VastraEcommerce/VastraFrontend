@@ -4,7 +4,3 @@
 
 /* Logo Font */
 @import url('https://fonts.googleapis.com/css2?family=Qwigley&display=swap');
-
-.zoom:hover img {
-  opacity: 0;
-}

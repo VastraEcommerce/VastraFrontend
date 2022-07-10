@@ -1,9 +1,20 @@
 import { useState } from 'react';
+import ImagesSlider from '../components/Product/ImagesSlider';
 import RateStars from '../components/Product/RateStars';
 import SwitchColors from '../components/Product/SwitchColors';
 import SwitchSizes from '../components/Product/SwitchSizes';
 const colors = ['#fff', '#f00', '#0f0', '#00f'];
 const sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl'];
+const images = [
+  'https://swiperjs.com/demos/images/nature-1.jpg',
+  'https://swiperjs.com/demos/images/nature-2.jpg',
+  'https://swiperjs.com/demos/images/nature-3.jpg',
+  'https://swiperjs.com/demos/images/nature-4.jpg',
+  'https://swiperjs.com/demos/images/nature-5.jpg',
+  'https://swiperjs.com/demos/images/nature-6.jpg',
+  'https://swiperjs.com/demos/images/nature-7.jpg',
+  'https://swiperjs.com/demos/images/nature-8.jpg',
+];
 export default function ProductDetails() {
   const [size, setSize] = useState(sizes[0]);
   const [color, setColor] = useState(colors[0]);
@@ -12,11 +23,11 @@ export default function ProductDetails() {
       <div className="capitalize text-center py-4 text-xs md:text-sm xl:text-start">
         home / {'productName'}
       </div>
-      <div className="flex flex-wrap justify-between gap-x-6">
-        <div className="border-2 border-black flex-grow w-full lg:basis-[calc(50%-1.5rem)] h-[calc(100vh-4.5rem)] lg:h-auto">
-          images
+      <div className="flex flex-wrap justify-between gap-6">
+        <div className="flex-grow w-full lg:w-[50%] md:basis-[calc(50%-1.5rem)] ">
+          <ImagesSlider images={images} />
         </div>
-        <div className="border-2 border-black flex-grow w-full lg:basis-[calc(50%-1.5rem)] lg:max-h-[calc(100vh-4.5rem)] flex flex-col text-center lg:text-start gap-y-4">
+        <div className=" flex-grow w-full md:basis-[calc(50%-1.5rem)] flex flex-col text-center lg:text-start gap-y-4">
           <div className="flex gap-x-2 justify-center capitalize text-sm lg:justify-start">
             <span className="badge-error text-white px-2">{'hot'}</span>
             <span className="badge-info text-white px-2">{'in stock'}</span>

@@ -10,19 +10,17 @@ function App() {
   return (
     <>
       <Navbar>
-        <div className="container">
-          <Routes>
-            <Route path="/">
-              <Route index element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<About />} />
-              <Route path="products">
-                <Route index element={<div>Products</div>} />
-                <Route path=":productId" element={<ProductDetails />} />
-              </Route>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="products">
+              <Route index element={<div>Products</div>} />
+              <Route path=":productId" element={<ProductDetails />} />
             </Route>
-          </Routes>
-        </div>
+          </Route>
+        </Routes>
         <Footer />
       </Navbar>
     </>

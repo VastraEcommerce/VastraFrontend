@@ -3,3 +3,11 @@
 @tailwind utilities;
 
 /* Logo Font */
+@import url('https://fonts.googleapis.com/css2?family=Qwigley&display=swap');
+.activeImage {
+  filter: drop-shadow(0px 1px 2px #000000) brightness(1);
+}
+
+.normalImage {
+  filter: drop-shadow(0px 3px 1px #000000) brightness(0.5);
+}

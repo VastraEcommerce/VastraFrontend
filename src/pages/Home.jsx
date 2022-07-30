@@ -1,12 +1,11 @@
-import { useRef } from "react";
-import ProductCard from "../components/ProuductCard/ProductCard";
-import { useGetAllProductsQuery } from "../features/services/products";
-import { useCurrentWidth } from "../hooks/useCurrentWidth";
-import heroImg from "../images/cover.png";
-import heroImgMobile from "../images/mobile-cover.png";
+import ProductCard from '../components/ProuductCard/ProductCard';
+import { useCurrentWidth } from '../hooks/useCurrentWidth';
+import heroImg from '../images/cover.png';
+import heroImgMobile from '../images/mobile-cover.png';
+import { useGetAllProductsQuery } from '../services/productApi';
 
 const Home = () => {
-  const { data, error, isLoading } = useGetAllProductsQuery();
+  const { data } = useGetAllProductsQuery();
 
   const width = useCurrentWidth();
 

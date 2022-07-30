@@ -1,0 +1,200 @@
+[
+  {
+    "category": "Shirts",
+    "brand": "Ambrose14",
+    "brand_thumbnail": "Gwendolyn_Wisoky",
+    "title": "Ally Boly",
+    "description": "Melba_Barrows",
+    "ratingsAverage": 2,
+    "ratingsQuantity": 79,
+    "variants": [
+      {
+        "color": "#999933",
+        "sizes": [
+          {
+            "size": "XL",
+            "count": 62,
+            "price": 36
+          },
+          {
+            "size": "XXL",
+            "count": 52,
+            "price": 61
+          }
+        ],
+        "images": [
+          "https://dummyimage.com/500/#999933/fff",
+          "https://dummyimage.com/500/#999933/fff",
+          "https://dummyimage.com/500/#999933/fff",
+          "https://dummyimage.com/500/#999933/fff"
+        ]
+      },
+      {
+        "color": "#00B3E6",
+        "sizes": [
+          {
+            "size": "S",
+            "count": 19,
+            "price": 80
+          },
+          {
+            "size": "XXL",
+            "count": 4,
+            "price": 12
+          },
+          {
+            "size": "XL",
+            "count": 15,
+            "price": 69
+          },
+          {
+            "size": "M",
+            "count": 34,
+            "price": 65
+          },
+          {
+            "size": "L",
+            "count": 20,
+            "price": 57
+          }
+        ],
+        "images": [
+          "https://dummyimage.com/500/#00B3E6/fff",
+          "https://dummyimage.com/500/#00B3E6/fff",
+          "https://dummyimage.com/500/#00B3E6/fff",
+          "https://dummyimage.com/500/#00B3E6/fff"
+        ]
+      },
+      {
+        "color": "#66994D",
+        "sizes": [
+          {
+            "size": "M",
+            "count": 49,
+            "price": 32
+          },
+          {
+            "size": "XL",
+            "count": 75,
+            "price": 11
+          }
+        ],
+        "images": [
+          "https://dummyimage.com/500/#66994D/fff",
+          "https://dummyimage.com/500/#66994D/fff",
+          "https://dummyimage.com/500/#66994D/fff",
+          "https://dummyimage.com/500/#66994D/fff"
+        ]
+      },
+      {
+        "color": "#99E6E6",
+        "sizes": [
+          {
+            "size": "M",
+            "count": 49,
+            "price": 5
+          }
+        ],
+        "images": [
+          "https://dummyimage.com/500/#99E6E6/fff",
+          "https://dummyimage.com/500/#99E6E6/fff",
+          "https://dummyimage.com/500/#99E6E6/fff",
+          "https://dummyimage.com/500/#99E6E6/fff"
+        ]
+      },
+      {
+        "color": "#B33300",
+        "sizes": [
+          {
+            "size": "S",
+            "count": 47,
+            "price": 61
+          },
+          {
+            "size": "L",
+            "count": 11,
+            "price": 2
+          },
+          {
+            "size": "XL",
+            "count": 1,
+            "price": 35
+          },
+          {
+            "size": "XXL",
+            "count": 26,
+            "price": 49
+          },
+          {
+            "size": "M",
+            "count": 62,
+            "price": 54
+          }
+        ],
+        "images": [
+          "https://dummyimage.com/500/#B33300/fff",
+          "https://dummyimage.com/500/#B33300/fff",
+          "https://dummyimage.com/500/#B33300/fff",
+          "https://dummyimage.com/500/#B33300/fff"
+        ]
+      },
+      {
+        "color": "#E666B3",
+        "sizes": [
+          {
+            "size": "XXL",
+            "count": 68,
+            "price": 73
+          },
+          {
+            "size": "L",
+            "count": 10,
+            "price": 69
+          },
+          {
+            "size": "XL",
+            "count": 5,
+            "price": 10
+          },
+          {
+            "size": "M",
+            "count": 39,
+            "price": 30
+          }
+        ],
+        "images": [
+          "https://dummyimage.com/500/#E666B3/fff",
+          "https://dummyimage.com/500/#E666B3/fff",
+          "https://dummyimage.com/500/#E666B3/fff",
+          "https://dummyimage.com/500/#E666B3/fff"
+        ]
+      },
+      {
+        "color": "#CCCC00",
+        "sizes": [
+          {
+            "size": "XL",
+            "count": 2,
+            "price": 58
+          },
+          {
+            "size": "XXXl",
+            "count": 46,
+            "price": 12
+          }
+        ],
+        "images": [
+          "https://dummyimage.com/500/#CCCC00/fff",
+          "https://dummyimage.com/500/#CCCC00/fff",
+          "https://dummyimage.com/500/#CCCC00/fff",
+          "https://dummyimage.com/500/#CCCC00/fff"
+        ]
+      }
+    ],
+    "_id": "62dae5bb25b426f73712296a",
+    "createdAt": "2022-07-22T18:00:28.013Z",
+    "updatedAt": "2022-07-22T18:00:28.013Z",
+    "slug": "ally-boly",
+    "__v": 0
+  }
+]

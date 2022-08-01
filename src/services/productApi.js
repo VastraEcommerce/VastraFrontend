@@ -9,6 +9,7 @@ export const productApi = createApi({
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: () => `/`,
+      transformResponse: (response, meta, error) => response.data,
       providesTags: (result, error, arg) =>
         result
           ? [
@@ -22,6 +23,7 @@ export const productApi = createApi({
     }),
     getProductById: builder.query({
       query: (id) => `/${id}`,
+      transformResponse: (response, meta, error) => response.data,
       providesTags: ['Product'],
     }),
   }),

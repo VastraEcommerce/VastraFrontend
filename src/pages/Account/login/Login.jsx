@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { BsFillKeyFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useDebouncedCallback } from "use-debounce";
 import * as Yup from "yup";
 import { updateValue } from "./slice";
 
@@ -19,9 +18,7 @@ const loginSchema = Yup.object().shape({
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const updateStore = useDebouncedCallback((key, val) => {
-    dispatch(updateValue({ key, val }));
-  }, 250);
+
   const [incorrectSubmit, setIncorrectSubmit] = useState("");
 
   return (
@@ -40,14 +37,21 @@ export default function Login() {
             onSubmit={(values) => {
               axios
                 .post(
-                  "https://fierce-shelf-11530.herokuapp.com/api/v1/users/login",
+                  `${process.env.REACT_APP_BASE_URL}api/v1/users/login`,
                   values
                 )
-                .then(({ data }) => {
-                  console.log(data);
-                  localStorage.setItem("token", data.token);
-                  navigate("/");
-                })
+                .then(
+                  ({
+                    data: {
+                      token,
+                      data: { user },
+                    },
+                  }) => {
+                    console.log(user);
+                    dispatch(updateValue({ user, token }));
+                    navigate("/");
+                  }
+                )
                 .catch(({ response }) => {
                   console.log(response.data.message);
                   setIncorrectSubmit(response.data.message);
@@ -98,7 +102,6 @@ export default function Login() {
                           value={values.email}
                           onChange={(event) => {
                             handleChange(event);
-                            updateStore("email", event.target.value);
                           }}
                           onBlur={handleBlur}
                         />
@@ -129,7 +132,6 @@ export default function Login() {
                           value={values.password}
                           onChange={(event) => {
                             handleChange(event);
-                            updateStore("password", event.target.value);
                           }}
                           onBlur={handleBlur}
                         />

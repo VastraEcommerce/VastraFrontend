@@ -39,10 +39,7 @@ export default function ImagesSlider({ images = [] }) {
       <div className="w-full h-full">
         <div className="flex flex-col-reverse w-full items-center gap-y-2 lg:flex-row md:items-start md:h-[calc(100%-4rem)] md:gap-x-2 overflow-hidden">
           {/* thumbs*/}
-          <div
-            className="flex flex-nowrap justify-center gap-2 w-full h-[100px] carousel
-                      lg:flex-col lg:w-[4.25rem] lg:h-full lg:carousel-vertical md:justify-start"
-          >
+          <div className="flex flex-nowrap justify-center gap-2 w-full h-[100px] carousel                      lg:flex-col lg:w-[4.25rem] lg:h-full lg:carousel-vertical md:justify-start">
             {images.map((image, index) => (
               /* img_wrap */
               <div
@@ -72,7 +69,7 @@ export default function ImagesSlider({ images = [] }) {
             <img
               src={`${process.env.REACT_APP_BASE_URL}${activeImage}`}
               alt=""
-              className="block pointer-events-none group-hover:opacity-0 object-center md:object-left-top object-contain w-full h-full lg:w-5/6 lg:h-3/4"
+              className="block pointer-events-none group-hover:opacity-0 object-center md:object-left-top object-contain w-full h-full lg:w-5/6 lg:h-3/4 xl:w-11/12 xl:h-5/6"
             />
           </figure>
         </div>

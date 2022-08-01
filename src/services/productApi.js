@@ -26,7 +26,16 @@ export const productApi = createApi({
       transformResponse: (response, meta, error) => response.data,
       providesTags: ['Product'],
     }),
+    getProductReviews: builder.query({
+      query: (productId) => `/${productId}/reviews`,
+      transformResponse: (response, meta, arg) => response.data,
+      providesTags: ['Reviews'],
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetProductByIdQuery } = productApi;
+export const {
+  useGetAllProductsQuery,
+  useGetProductByIdQuery,
+  useGetProductReviewsQuery,
+} = productApi;

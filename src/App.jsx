@@ -20,9 +20,11 @@ function App() {
               <Route
                 index
                 element={
-                  <Button className=" btn btn-primary" variant="contained">
-                    Contained
-                  </Button>
+                  <div>
+                    <Button className=" btn btn-primary" variant="contained">
+                      Contained
+                    </Button>
+                  </div>
                 }
               />
               <Route path=":productId" element={<ProductDetails />} />

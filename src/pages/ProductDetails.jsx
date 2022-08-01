@@ -6,6 +6,7 @@ import ImagesSlider from '../components/Product/ImagesSlider';
 import RateStars from '../components/Product/RateStars';
 import SwitchColors from '../components/Product/SwitchColors';
 import SwitchSizes from '../components/Product/SwitchSizes';
+import Reviews from '../components/Reviews/Reviews';
 
 export default function ProductDetails() {
   const { pathname } = useLocation();
@@ -13,7 +14,6 @@ export default function ProductDetails() {
   const id = params.productId;
 
   const { data, isError, isLoading } = useGetProductByIdQuery(id);
-  console.log({ data });
 
   const [variant, setVariant] = useState(() => data?.variants[0]);
   const [size, setSize] = useState(variant?.sizes[0]);
@@ -42,7 +42,6 @@ export default function ProductDetails() {
 
   if (isError) return <div>There is error</div>;
   if (isLoading) return <div>Loading...</div>;
-  console.log({ variant });
 
   return (
     <div className="container">
@@ -98,6 +97,16 @@ export default function ProductDetails() {
             />
           </div>
         </div>
+      </div>
+      <hr />
+      <div className="my-6">
+        <h1
+          id="reviews"
+          className="text-xl font-semibold capitalize text-center md:text-start"
+        >
+          customer reviews
+        </h1>
+        <Reviews productId={id} />
       </div>
     </div>
   );

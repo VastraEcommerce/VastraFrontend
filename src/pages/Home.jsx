@@ -1,8 +1,8 @@
-import ProductCard from '../components/ProuductCard/ProductCard';
-import { useCurrentWidth } from '../hooks/useCurrentWidth';
-import heroImg from '../images/cover.png';
-import heroImgMobile from '../images/mobile-cover.png';
-import { useGetAllProductsQuery } from '../services/productApi';
+import ProductCard from "../components/ProuductCard/ProductCard";
+import { useCurrentWidth } from "../hooks/useCurrentWidth";
+import heroImg from "../images/cover.png";
+import heroImgMobile from "../images/mobile-cover.png";
+import { useGetAllProductsQuery } from "../services/productApi";
 
 const Home = () => {
   const { data } = useGetAllProductsQuery();

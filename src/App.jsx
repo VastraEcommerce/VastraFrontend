@@ -5,6 +5,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
+import Button from '@mui/material/Button';
 
 function App() {
   return (
@@ -16,7 +17,14 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="products">
-              <Route index element={<div>Products</div>} />
+              <Route
+                index
+                element={
+                  <Button className=" btn btn-primary" variant="contained">
+                    Contained
+                  </Button>
+                }
+              />
               <Route path=":productId" element={<ProductDetails />} />
             </Route>
           </Route>

@@ -1,32 +1,44 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Navbar from "./components/Navbar";
+import Profile from "./pages/Profile";
+import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
-import Footer from "./components/Footer";
-import Register from "./pages/Account/register/Register";
+import Button from "@mui/material/Button";
+import Address from "./pages/Address";
 import Login from "./pages/Account/login/Login";
-
+import Register from "./pages/Account/register/Register";
 function App() {
   return (
     <>
       <Navbar>
-        <div className="container">
-          <Routes>
-            <Route path="/">
-              <Route index element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<About />} />
-              <Route path="products">
-                <Route index element={<div>Products</div>} />
-                <Route path=":productId" element={<ProductDetails />} />
-              </Route>
-              <Route path="/signup" element={<Register />} />
-              <Route path="/login" element={<Login />} />
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="profile">
+              <Route index element={<Profile />} />
+              <Route path="address" element={<Address />} />
             </Route>
-          </Routes>
-        </div>
+
+            <Route path="products">
+              <Route
+                index
+                element={
+                  <Button className=" btn btn-primary" variant="contained">
+                    Contained
+                  </Button>
+                }
+              />
+              <Route path=":productId" element={<ProductDetails />} />
+            </Route>
+          </Route>
+        </Routes>
         <Footer />
       </Navbar>
     </>

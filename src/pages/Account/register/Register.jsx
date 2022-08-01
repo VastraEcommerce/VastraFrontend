@@ -24,7 +24,7 @@ const SignUpSchema = Yup.object().shape({
         body: JSON.stringify({ email: inputValue }),
       };
       const response = await fetch(
-        "https://fierce-shelf-11530.herokuapp.com/api/v1/users/isExist",
+        `${process.env.REACT_APP_BASE_URL}api/v1/users/isExist`,
         requestOptions
       );
       const data = await response.json();
@@ -70,7 +70,7 @@ export default function Register() {
             onSubmit={(values) => {
               axios
                 .post(
-                  "https://fierce-shelf-11530.herokuapp.com/api/v1/users/signup",
+                  `${process.env.REACT_APP_BASE_URL}api/v1/users/signup`,
                   values
                 )
                 .then(

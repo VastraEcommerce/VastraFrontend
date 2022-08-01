@@ -1,9 +1,11 @@
-import ProductCard from '../components/ProuductCard/ProductCard'
-const Home = () => {
+import ProductCard from "../components/ProuductCard/ProductCard";
 
-  return <div>
-    <ProductCard />
-    </div>;
+const Home = () => {
+  return (
+    <div>
+      <ProductCard />
+    </div>
+  );
 };
 
 export default Home;

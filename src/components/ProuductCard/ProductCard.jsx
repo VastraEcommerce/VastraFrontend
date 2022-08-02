@@ -1,24 +1,21 @@
-import { useState } from "react";
-import { BiShoppingBag } from "react-icons/bi";
-import { BsSuitHeart } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import RatStars from "../Product/RateStars";
-import SwitchColors from "../Product/SwitchColors";
-import SwitchSizes from "../Product/SwitchSizes";
-import img from "./PlaceholderImage/Capture.PNG";
+import { useState } from 'react';
+import { BiShoppingBag } from 'react-icons/bi';
+import { BsSuitHeart } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import RatStars from '../Product/RateStars';
+import SwitchColors from '../Product/SwitchColors';
+import SwitchSizes from '../Product/SwitchSizes';
+import img from './PlaceholderImage/Capture.PNG';
 
 export default function ProductCard({ productInfo }) {
   const variants = productInfo.variants.filter(
     (varient) => varient.sizes.length > 0
   );
   const colors = variants.map((variant) => variant.color);
-  // const sizes = ["xs", "s", "sm", "xl", "xxl"];
 
   const [color, setColor] = useState(colors[0]);
 
-  const sizes = variants
-    .find((variant) => variant.color === color)
-    .sizes.map((size) => (size ? size.size : 0));
+  const sizes = variants.find((variant) => variant.color === color).sizes;
 
   const [size, setSize] = useState(sizes[0]);
 
@@ -33,22 +30,22 @@ export default function ProductCard({ productInfo }) {
         <div className="ml-1">
           <div className="space-y-2">
             <h3 className="text-xs text-light pt-2">
-              {productInfo.brand || "Dolce & Gabbana"}
+              {productInfo.brand || 'Dolce & Gabbana'}
             </h3>
             <p className="text-xs text-neutral-500">
-              {" "}
-              {productInfo.title || "Jersey Graphic Tee Dolce"}
+              {' '}
+              {productInfo.title || 'Jersey Graphic Tee Dolce'}
             </p>
           </div>
           <p className="space-x-2 mt-1">
-            <span className="text-xl">{size}</span>
+            <span className="text-xl">{size.size}</span>
           </p>
           <div className="colors flex justify-between w-[100%] mt-3 mb-4">
             <SwitchColors
               colors={colors}
               onChangeColorStateHandler={setColor}
               currentColorState={color}
-              circleSize={"1.2rem"}
+              circleSize={'1.2rem'}
             />
           </div>
           <div className="productSize flex justify-between w-[100%] text-center mb-4">
@@ -56,7 +53,7 @@ export default function ProductCard({ productInfo }) {
               sizes={sizes}
               onChangeSizeStateHandler={setSize}
               currentSizeState={size}
-              boxSize={"0.4rem"}
+              boxSize={'0.5rem'}
             />
           </div>
           <div className="flex justify-start items-center pt-3 pb-2  mt-1">
@@ -82,7 +79,7 @@ export default function ProductCard({ productInfo }) {
             <RatStars
               size={15}
               value={productInfo.ratingsAverage}
-              onChange={""}
+              onChange={''}
               readOnly={true}
             />
           </div>

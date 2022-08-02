@@ -1,8 +1,12 @@
-import ProductCard from '../components/ProuductCard/ProductCard';
-import { useCurrentWidth } from '../hooks/useCurrentWidth';
-import heroImg from '../images/cover.png';
-import heroImgMobile from '../images/mobile-cover.png';
-import { useGetAllProductsQuery } from '../services/productApi';
+import CategoryCard from "../components/CategoryCard";
+import ProductCard from "../components/ProuductCard/ProductCard";
+import { useCurrentWidth } from "../hooks/useCurrentWidth";
+import heroImg from "../images/cover.png";
+import heroImgMobile from "../images/mobile-cover.png";
+import { useGetAllProductsQuery } from "../services/productApi";
+import women from "../images/women.png";
+import men from "../images/men.png";
+import acc from "../images/acc.png";
 
 const Home = () => {
   const { data } = useGetAllProductsQuery();
@@ -28,7 +32,14 @@ const Home = () => {
         </div>
       </section>
 
-      {data ? <ProductCard productInfo={data[0]} /> : <>No Data</>}
+      {/* Categories Section */}
+      <section>
+        <CategoryCard img={women} categoryName="Women's" />
+        <CategoryCard img={men} categoryName="Men's" />
+        <CategoryCard img={acc} categoryName="Accessories" />
+      </section>
+
+      {data ? <ProductCard productInfo={data.data[0]} /> : <>No Data</>}
     </div>
   );
 };

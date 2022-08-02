@@ -1,8 +1,13 @@
-import ProductCard from '../components/ProuductCard/ProductCard';
-import { useCurrentWidth } from '../hooks/useCurrentWidth';
-import heroImg from '../images/cover.png';
-import heroImgMobile from '../images/mobile-cover.png';
-import { useGetAllProductsQuery } from '../services/productApi';
+import CategoryCard from "../components/CategoryCard";
+import ProductCard from "../components/ProuductCard/ProductCard";
+import { useCurrentWidth } from "../hooks/useCurrentWidth";
+import heroImg from "../images/cover.png";
+import heroImgMobile from "../images/mobile-cover.png";
+import { useGetAllProductsQuery } from "../services/productApi";
+import women from "../images/women.png";
+import men from "../images/men.png";
+import acc from "../images/acc.png";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data } = useGetAllProductsQuery();
@@ -28,7 +33,31 @@ const Home = () => {
         </div>
       </section>
 
-      {data ? <ProductCard productInfo={data[0]} /> : <>No Data</>}
+      {/* Categories Section */}
+      <section className="container my-10">
+        <div className=" md:columns-3">
+          <CategoryCard img={women} categoryName="Women's" link="#" />
+          <CategoryCard img={men} categoryName="Men's" link="#" />
+          <CategoryCard img={acc} categoryName="Accessories" link="#" />
+        </div>
+      </section>
+
+      {/* Trending Now Section */}
+      {data ? (
+        <section className="container">
+          <h2 className="uppercase text-center text-lg">Trending Now</h2>
+          {/* <div className=" my-10 sm:columns-2 md:columns-3 lg:columns-4"> */}
+          <div className="my-10 flex flex-wrap justify-around">
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+          </div>
+        </section>
+      ) : (
+        <>No Data</>
+      )}
     </div>
   );
 };

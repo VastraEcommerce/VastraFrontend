@@ -1,12 +1,12 @@
-import ProductCard from "../components/ProuductCard/ProductCard";
-import { useCurrentWidth } from "../hooks/useCurrentWidth";
-import heroImg from "../images/cover.png";
-import heroImgMobile from "../images/mobile-cover.png";
-import { useGetAllProductsQuery } from "../services/productApi";
+import ProductCard from '../components/ProuductCard/ProductCard';
+import { useCurrentWidth } from '../hooks/useCurrentWidth';
+import heroImg from '../images/cover.png';
+import heroImgMobile from '../images/mobile-cover.png';
+import { useGetAllProductsQuery } from '../services/productApi';
 
 const Home = () => {
   const { data } = useGetAllProductsQuery();
-
+  console.log({ data });
   const width = useCurrentWidth();
 
   return (
@@ -29,7 +29,7 @@ const Home = () => {
         </div>
       </section>
 
-      {data ? <ProductCard productInfo={data.data[0]} /> : <>No Data</>}
+      {data ? <ProductCard productInfo={data[0]} /> : <>No Data</>}
     </div>
   );
 };

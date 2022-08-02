@@ -13,7 +13,7 @@ export const productApi = createApi({
       providesTags: (result, error, arg) =>
         result
           ? [
-              ...result.data.map(({ _id }) => ({
+              ...result.map(({ _id }) => ({
                 type: 'Product',
                 _id,
               })),

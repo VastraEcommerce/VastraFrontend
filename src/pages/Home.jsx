@@ -39,7 +39,7 @@ const Home = () => {
         <CategoryCard img={acc} categoryName="Accessories" />
       </section>
 
-      {data ? <ProductCard productInfo={data.data[0]} /> : <>No Data</>}
+      {data ? <ProductCard productInfo={data[0]} /> : <>No Data</>}
     </div>
   );
 };

@@ -18,8 +18,37 @@ const loginSchema = Yup.object().shape({
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [forgetPassword, setForgetPassword] = useState({
+    email: "",
+  });
+  const [messageForgetPass, setMessageForgerPass] = useState("");
 
   const [incorrectSubmit, setIncorrectSubmit] = useState("");
+  const forgetPasswordApi = () => {
+    if (forgetPassword.email !== "" && forgetPassword.email !== "Required") {
+      axios
+        .post(
+          `${process.env.REACT_APP_BASE_URL}api/v1/users/forgotPassword`,
+          forgetPassword
+        )
+        .then(({ data: { message } }) => {
+          console.log(message);
+          setMessageForgerPass(message);
+        })
+        .catch(
+          ({
+            response: {
+              data: { message },
+            },
+          }) => {
+            setMessageForgerPass(message);
+          }
+        );
+    } else {
+      setForgetPassword({ email: "Required" });
+      console.log(forgetPassword);
+    }
+  };
 
   return (
     <>
@@ -102,6 +131,9 @@ export default function Login() {
                           value={values.email}
                           onChange={(event) => {
                             handleChange(event);
+                            setForgetPassword({
+                              email: event.target.value,
+                            });
                           }}
                           onBlur={handleBlur}
                         />
@@ -109,6 +141,10 @@ export default function Login() {
                       {errors.email && touched.email ? (
                         <p className="mt-2 text-sm font-bold text-red-600 dark:text-red-500">
                           {errors.email}
+                        </p>
+                      ) : forgetPassword.email === "Required" ? (
+                        <p className="mt-2 text-sm font-bold text-red-600 dark:text-red-500">
+                          Required
                         </p>
                       ) : null}
                     </label>
@@ -126,7 +162,7 @@ export default function Login() {
                         <input
                           className="
                       bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          required
+                          // required
                           name="password"
                           type="password"
                           value={values.password}
@@ -143,15 +179,18 @@ export default function Login() {
                       ) : null}
                     </label>
                   </div>
-                  <button
-                    type="submit"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    disabled={!isValid}
-                  >
-                    Submit
-                  </button>
+                  <div className="text-center">
+                    <button
+                      type="submit"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      disabled={!isValid}
+                    >
+                      Submit
+                    </button>
+                  </div>
+
                   {incorrectSubmit && (
-                    <p className="mt-2 text-sm font-bold text-red-600 dark:text-red-500">
+                    <p className="text-center mt-2 text-sm font-bold text-red-600 dark:text-red-500">
                       {incorrectSubmit}
                     </p>
                   )}
@@ -159,6 +198,24 @@ export default function Login() {
               );
             }}
           </Formik>
+          <div className="text-center">
+            <button
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-3"
+              onClick={forgetPasswordApi}
+            >
+              Forget Password
+            </button>
+            {messageForgetPass ===
+            "There is no user with this email address" ? (
+              <p className="text-center mt-2 text-sm font-bold text-red-600 dark:text-red-500">
+                {messageForgetPass}
+              </p>
+            ) : messageForgetPass === "Token sent to email" ? (
+              <p className="text-center mt-2 text-sm font-bold text-green-600 dark:text-green-500">
+                Message Sent To Your Email
+              </p>
+            ) : null}
+          </div>
         </div>
       </div>
     </>

@@ -6,7 +6,6 @@ import { useGetAllProductsQuery } from '../services/productApi';
 
 const Home = () => {
   const { data } = useGetAllProductsQuery();
-  console.log({ data });
   const width = useCurrentWidth();
 
   return (

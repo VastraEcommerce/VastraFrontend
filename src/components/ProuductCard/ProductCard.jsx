@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { BiShoppingBag } from "react-icons/bi";
-import { BsSuitHeart } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import RatStars from "../Product/RateStars";
-import SwitchColors from "../Product/SwitchColors";
-import SwitchSizes from "../Product/SwitchSizes";
-import img from "./PlaceholderImage/Capture.PNG";
+import { useState } from 'react';
+import { BiShoppingBag } from 'react-icons/bi';
+import { BsSuitHeart } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import RatStars from '../Product/RateStars';
+import SwitchColors from '../Product/SwitchColors';
+import SwitchSizes from '../Product/SwitchSizes';
 
 export default function ProductCard({ productInfo }) {
   const variants = productInfo.variants.filter(
@@ -24,17 +23,17 @@ export default function ProductCard({ productInfo }) {
     <div className="card my-5 mx-3 max-w-[270px] bg-white drop-shadow-md rounded-lg">
       <img
         className="object-cover rounded-tl-lg rounded-tr-lg"
-        src={img}
+        src={`${process.env.REACT_APP_BASE_URL}${productInfo.variants[0].images[0]}`}
         alt=""
       />
       <div className="ml-1">
         <div className="space-y-2">
           <h3 className="text-xs text-light pt-2">
-            {productInfo.brand || "Dolce & Gabbana"}
+            {productInfo.brand || 'Dolce & Gabbana'}
           </h3>
           <p className="text-xs text-neutral-500">
-            {" "}
-            {productInfo.title || "Jersey Graphic Tee Dolce"}
+            {' '}
+            {productInfo.title || 'Jersey Graphic Tee Dolce'}
           </p>
         </div>
         <p className="space-x-2 mt-1">
@@ -45,7 +44,7 @@ export default function ProductCard({ productInfo }) {
             colors={colors}
             onChangeColorStateHandler={setColor}
             currentColorState={color}
-            circleSize={"1.2rem"}
+            circleSize={'1.2rem'}
           />
         </div>
         <div className="productSize flex justify-between w-[100%] text-center mb-4">
@@ -53,7 +52,7 @@ export default function ProductCard({ productInfo }) {
             sizes={sizes}
             onChangeSizeStateHandler={setSize}
             currentSizeState={size}
-            boxSize={"0.5rem"}
+            boxSize={'0.5rem'}
           />
         </div>
         <div className="flex justify-start items-center pt-3 pb-2  mt-1">
@@ -79,7 +78,7 @@ export default function ProductCard({ productInfo }) {
           <RatStars
             size={15}
             value={productInfo.ratingsAverage}
-            onChange={""}
+            onChange={''}
             readOnly={true}
           />
         </div>

@@ -42,7 +42,22 @@ const Home = () => {
         </div>
       </section>
 
-      {data ? <ProductCard productInfo={data[0]} /> : <>No Data</>}
+      {/* Trending Now Section */}
+      {data ? (
+        <section className="container">
+          <h2 className="uppercase text-center text-lg">Trending Now</h2>
+          {/* <div className=" my-10 sm:columns-2 md:columns-3 lg:columns-4"> */}
+          <div className="my-10 flex flex-wrap justify-around">
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+            <ProductCard productInfo={data[0]} />
+          </div>
+        </section>
+      ) : (
+        <>No Data</>
+      )}
     </div>
   );
 };

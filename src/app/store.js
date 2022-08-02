@@ -11,7 +11,7 @@ export const store = configureStore( {
     register: registerReducer,
     login: loginReducer,
   },
-  middleware: [ productApi.middleware, usersApi.middleware ]
+  middleware: ( getDefaultMiddleware ) => getDefaultMiddleware().concat( productApi.middleware )
 
 } );
 

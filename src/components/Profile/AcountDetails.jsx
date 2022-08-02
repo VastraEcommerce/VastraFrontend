@@ -7,14 +7,9 @@ import { Link } from "react-router-dom";
 import { MdAdd } from "react-icons/md";
 
 export default function AcountDetails() {
-  const [expanded, setExpanded] = React.useState(true);
-
-  const handleChange = () => {
-    setExpanded(!expanded);
-  };
   return (
     <div>
-      <Accordion expanded={expanded} onClick={handleChange} className='mb-20'>
+      <Accordion expanded={true} className='mb-20'>
         <AccordionSummary
           expandIcon={<MdAdd />}
           aria-controls='panel1a-content'

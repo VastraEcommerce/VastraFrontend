@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BiShoppingBag } from 'react-icons/bi';
 import { BsSuitHeart } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RatStars from '../Product/RateStars';
 import SwitchColors from '../Product/SwitchColors';
 import SwitchSizes from '../Product/SwitchSizes';
@@ -17,14 +17,17 @@ export default function ProductCard({ productInfo }) {
   const sizes = variants.find((variant) => variant.color === color).sizes;
 
   const [size, setSize] = useState(sizes[0]);
+  const navigate = useNavigate();
 
   return (
     // <div className="container py-5 border border-rose-600">
     <div className="card my-5 mx-3 max-w-[270px] bg-white drop-shadow-md rounded-lg">
+      {/* // TODO عبده بقولك هاندل انت تغير الصورة اما الفاريت يتغير */}
       <img
-        className="object-cover rounded-tl-lg rounded-tr-lg"
+        className="object-cover rounded-tl-lg rounded-tr-lg cursor-pointer"
         src={`${process.env.REACT_APP_BASE_URL}${productInfo.variants[0].images[0]}`}
         alt=""
+        onClick={() => navigate(`/products/${productInfo._id}`)}
       />
       <div className="ml-1">
         <div className="space-y-2">

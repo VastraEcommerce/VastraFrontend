@@ -5,12 +5,13 @@ import { useGetUserQuery } from "../../services/usersApi";
 export default function GetAdress() {
   const user = useSelector((state) => state.register.user);
   //supose to modify the service in get user to send id dynamic
-  const { data, isLoading, isSuccess } = useGetUserQuery(user.id);
+  const { data, isLoading, isSuccess, isError } = useGetUserQuery(user.id);
 
   return (
     <>
       <h2 className=' my-10 ml-16 text-xl '>YOUR ADRESSES</h2>
-      {isLoading && "loading...."}
+      {isLoading && <p className='mx-auto my-10'>loading...</p>}
+      {isError && <p className='mx-auto my-10'>Something Went wrong</p>}
       {isSuccess && (
         <div>
           {data.data.address.map((address, i) => {

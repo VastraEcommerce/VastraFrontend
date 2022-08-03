@@ -40,7 +40,7 @@ export default function AcountDetails() {
           <div className=' my-2 flex p-2  border-b '>
             <p className=' font-light'>COUNTRY:</p>
             <p className='mx-auto'>
-              {user.address && user.address.country
+              {user.address && user.address[0].country
                 ? user.address.country
                 : "NO COUNTERY"}
             </p>

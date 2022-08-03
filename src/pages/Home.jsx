@@ -1,16 +1,15 @@
-import CategoryCard from "../components/CategoryCard";
-import ProductCard from "../components/ProuductCard/ProductCard";
-import { useCurrentWidth } from "../hooks/useCurrentWidth";
-import heroImg from "../images/cover.png";
-import heroImgMobile from "../images/mobile-cover.png";
-import { useGetAllProductsQuery } from "../services/productApi";
-import women from "../images/women.png";
-import men from "../images/men.png";
-import acc from "../images/acc.png";
-import { Link } from "react-router-dom";
+import CategoryCard from '../components/CategoryCard';
+import ProductCard from '../components/ProuductCard/ProductCard';
+import { useCurrentWidth } from '../hooks/useCurrentWidth';
+import acc from '../images/acc.png';
+import heroImg from '../images/cover.png';
+import men from '../images/men.png';
+import heroImgMobile from '../images/mobile-cover.png';
+import women from '../images/women.png';
+import { useGetAllProductsQuery } from '../services/productApi';
 
 const Home = () => {
-  const { data } = useGetAllProductsQuery();
+  const { data: products, isError, isLoading } = useGetAllProductsQuery();
   const width = useCurrentWidth();
 
   return (
@@ -43,21 +42,24 @@ const Home = () => {
       </section>
 
       {/* Trending Now Section */}
-      {data ? (
-        <section className="container">
-          <h2 className="uppercase text-center text-lg">Trending Now</h2>
-          {/* <div className=" my-10 sm:columns-2 md:columns-3 lg:columns-4"> */}
+
+      {/* <div className=" my-10 sm:columns-2 md:columns-3 lg:columns-4"> */}
+      <section className="container">
+        <h2 className="uppercase text-center text-lg">Trending Now</h2>
+        {isError ? (
+          <div>There is an error</div>
+        ) : isLoading ? (
+          <div>Loading...</div>
+        ) : products ? (
           <div className="my-10 flex flex-wrap justify-around">
-            <ProductCard productInfo={data[0]} />
-            <ProductCard productInfo={data[0]} />
-            <ProductCard productInfo={data[0]} />
-            <ProductCard productInfo={data[0]} />
-            <ProductCard productInfo={data[0]} />
+            {products?.map((product) => (
+              <ProductCard key={product._id} productInfo={product} />
+            ))}
           </div>
-        </section>
-      ) : (
-        <>No Data</>
-      )}
+        ) : (
+          ''
+        )}
+      </section>
     </div>
   );
 };

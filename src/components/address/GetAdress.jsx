@@ -1,11 +1,14 @@
 import React from "react";
-import DeleteAddress from "./DeleteAddress";
 import { useSelector } from "react-redux";
+import DeleteAddress from "./DeleteAddress";
+import EditAddress from "./EditAddress";
 import { useGetUserQuery } from "../../services/usersApi";
+
 export default function GetAdress() {
   const user = useSelector((state) => state.register.user);
   //supose to modify the service in get user to send id dynamic
-  const { data, isLoading, isSuccess, isError } = useGetUserQuery(user.id);
+  const { data, isLoading, isSuccess, isError } = useGetUserQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
+  // console.log(data);
 
   return (
     <>
@@ -18,26 +21,27 @@ export default function GetAdress() {
             return (
               <div className='col' key={i}>
                 <div className=' my-2 mx-16 flex p-2  border-b '>
-                  <p className=' font-light'>City:</p>
-                  <p className='mx-auto'>{address.city}</p>
-                </div>
-                <div className=' my-2 mx-16 flex p-2  border-b '>
                   <p className=' font-light'>Street:</p>
                   <p className='mx-auto'>{address.street}</p>
                 </div>
                 <div className=' my-2 mx-16 flex p-2  border-b '>
-                  <p className=' font-light'>Building:</p>
-                  <p className='mx-auto'>{address.building}</p>
+                  <p className=' font-light'>Buliding:</p>
+                  <p className='mx-auto'> {address.buliding}</p>
                 </div>
                 <div className=' my-2 mx-16 flex p-2  border-b '>
-                  <p className=' font-light'>Countery:</p>
-                  <p className='mx-auto'>{address.countery}</p>
+                  <p className=' font-light'>City:</p>
+                  <p className='mx-auto'> {address.city} </p>
+                </div>
+                <div className=' my-2 mx-16 flex p-2  border-b '>
+                  <p className=' font-light'>Country:</p>
+                  <p className='mx-auto'>{address.country}</p>
                 </div>
                 <div className=' my-2 mx-16 flex p-2  border-b '>
                   <p className=' font-light'>Purpose:</p>
                   <p className='mx-auto'>{address.purpose}</p>
                 </div>
-                <DeleteAddress address={address._id} />
+                <DeleteAddress thisAddress={address} />
+                <EditAddress thisAddress={address} />
               </div>
             );
           })}

@@ -1,31 +1,57 @@
-import axios from "axios";
-import { Form, Formik } from "formik";
-import React, { useState } from "react";
-import { BsFillKeyFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
-import { updateValue } from "./slice";
+import axios from 'axios';
+import { Form, Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { BsFillKeyFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { useLoginMutation } from '../../../features/auth/authApiSlice';
+import {
+  selectCurrentToken,
+  selectPersist,
+  setCredentials,
+} from '../../../features/auth/authSlice';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Invalid email")
-    .required("Required")
-    .trim("Required"),
-  password: Yup.string().required("Required").trim("Required"),
+    .email('Invalid email')
+    .required('Required')
+    .trim('Required'),
+  password: Yup.string().required('Required').trim('Required'),
 });
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [forgetPassword, setForgetPassword] = useState({
-    email: "",
-  });
-  const [messageForgetPass, setMessageForgerPass] = useState("");
+  const [login, { isLoading, error, isError, isSuccess }] = useLoginMutation();
+  const persist = useSelector(selectPersist);
+  const token = useSelector(selectCurrentToken);
 
-  const [incorrectSubmit, setIncorrectSubmit] = useState("");
+  const [forgetPassword, setForgetPassword] = useState({
+    email: '',
+  });
+  const [messageForgetPass, setMessageForgerPass] = useState('');
+  const [incorrectSubmit, setIncorrectSubmit] = useState('');
+
+  console.log({ persist });
+  useEffect(() => {
+    localStorage.setItem('persist', persist);
+    if (persist) localStorage.setItem('accessToken', token);
+    else localStorage.removeItem('accessToken');
+  }, [persist, token]);
+
+  useEffect(() => {
+    console.log({ error });
+    if (isError) setIncorrectSubmit(error?.data?.message);
+  }, [error, isError]);
+
+  useEffect(() => {
+    if (isSuccess) navigate('/welcome');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
+
   const forgetPasswordApi = () => {
-    if (forgetPassword.email !== "" && forgetPassword.email !== "Required") {
+    if (forgetPassword.email !== '' && forgetPassword.email !== 'Required') {
       axios
         .post(
           `${process.env.REACT_APP_BASE_URL}api/v1/users/forgotPassword`,
@@ -45,9 +71,17 @@ export default function Login() {
           }
         );
     } else {
-      setForgetPassword({ email: "Required" });
+      setForgetPassword({ email: 'Required' });
       console.log(forgetPassword);
     }
+  };
+
+  const submitHandler = async (values) => {
+    const userData = await login(values);
+    console.log({ userData });
+    const user = userData?.data?.user;
+    const token = userData?.data?.token;
+    dispatch(setCredentials({ token: token, user: user }));
   };
 
   return (
@@ -59,33 +93,11 @@ export default function Login() {
         <div className="p-6 border border-gray-300 sm:rounded-md  dark:bg-gray-700">
           <Formik
             initialValues={{
-              email: "",
-              password: "",
+              email: '',
+              password: '',
             }}
             validationSchema={loginSchema}
-            onSubmit={(values) => {
-              axios
-                .post(
-                  `${process.env.REACT_APP_BASE_URL}api/v1/users/login`,
-                  values
-                )
-                .then(
-                  ({
-                    data: {
-                      token,
-                      data: { user },
-                    },
-                  }) => {
-                    console.log(user);
-                    dispatch(updateValue({ user, token }));
-                    navigate("/");
-                  }
-                )
-                .catch(({ response }) => {
-                  console.log(response.data.message);
-                  setIncorrectSubmit(response.data.message);
-                });
-            }}
+            onSubmit={submitHandler}
           >
             {({
               handleSubmit,
@@ -122,7 +134,7 @@ export default function Login() {
                     bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           style={{
                             borderColor:
-                              errors.email && touched.email ? "red" : "inherit",
+                              errors.email && touched.email ? 'red' : 'inherit',
                           }}
                           required
                           placeholder="name@flowbite.com"
@@ -142,7 +154,7 @@ export default function Login() {
                         <p className="mt-2 text-sm font-bold text-red-600 dark:text-red-500">
                           {errors.email}
                         </p>
-                      ) : forgetPassword.email === "Required" ? (
+                      ) : forgetPassword.email === 'Required' ? (
                         <p className="mt-2 text-sm font-bold text-red-600 dark:text-red-500">
                           Required
                         </p>
@@ -182,7 +194,9 @@ export default function Login() {
                   <div className="text-center">
                     <button
                       type="submit"
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 btn ${
+                        isLoading && 'loading'
+                      }`}
                       disabled={!isValid}
                     >
                       Submit
@@ -200,17 +214,17 @@ export default function Login() {
           </Formik>
           <div className="text-center">
             <button
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-3"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-3 btn"
               onClick={forgetPasswordApi}
             >
               Forget Password
             </button>
             {messageForgetPass ===
-            "There is no user with this email address" ? (
+            'There is no user with this email address' ? (
               <p className="text-center mt-2 text-sm font-bold text-red-600 dark:text-red-500">
                 {messageForgetPass}
               </p>
-            ) : messageForgetPass === "Token sent to email" ? (
+            ) : messageForgetPass === 'Token sent to email' ? (
               <p className="text-center mt-2 text-sm font-bold text-green-600 dark:text-green-500">
                 Message Sent To Your Email
               </p>

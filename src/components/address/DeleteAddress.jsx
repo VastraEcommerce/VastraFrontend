@@ -1,7 +1,31 @@
-import React from "react";
+import * as React from "react";
+import { useSelector } from "react-redux";
 
-export default function DeleteAddress(props) {
-  const handleDelete = () => {};
+import {
+  useUpdateAddressForUserMutation,
+  useGetUserQuery,
+} from "../../services/usersApi";
+
+export default function DeleteAddress({ thisAddress }) {
+  const { user } = useSelector((state) => state.register.user);
+  const { data } = useGetUserQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
+  console.log(thisAddress);
+  const [updateAddressForUser] = useUpdateAddressForUserMutation();
+
+  const DeleteAdress = (arrayOfAddress) => {
+    const addressArray = arrayOfAddress.filter((object) => {
+      return object._id !== thisAddress._id;
+    });
+    return addressArray;
+  };
+  const handleDelete = async () => {
+    await updateAddressForUser({
+      ...data.data,
+      address: DeleteAdress(data.data.address),
+    });
+    console.log(DeleteAdress(data.data.address));
+  };
+
   return (
     <div className='flex justify-end'>
       <button

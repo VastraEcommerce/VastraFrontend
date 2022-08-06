@@ -58,7 +58,6 @@ export default function Login() {
           forgetPassword
         )
         .then(({ data: { message } }) => {
-          console.log(message);
           setMessageForgerPass(message);
         })
         .catch(

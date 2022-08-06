@@ -18,17 +18,10 @@ const SignUpSchema = Yup.object().shape({
     .trim('Required')
 
     .test('email', 'We Have This Email', async (inputValue) => {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: inputValue }),
-      };
-      const response = await fetch(
+      const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}api/v1/users/isExist`,
-        requestOptions
+        { email: inputValue }
       );
-      const data = await response.json();
-      console.log(data.isExist);
       return !data.isExist;
     }),
   password: Yup.string()

@@ -10,6 +10,7 @@ import {
   selectCurrentToken,
   selectPersist,
   setCredentials,
+  setPersist,
 } from '../../../features/auth/authSlice';
 
 const loginSchema = Yup.object().shape({
@@ -21,34 +22,19 @@ const loginSchema = Yup.object().shape({
 });
 
 export default function Login() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [login, { isLoading, error, isError, isSuccess }] = useLoginMutation();
   const persist = useSelector(selectPersist);
+  console.log('first', { persist });
   const token = useSelector(selectCurrentToken);
-
   const [forgetPassword, setForgetPassword] = useState({
     email: '',
   });
   const [messageForgetPass, setMessageForgerPass] = useState('');
   const [incorrectSubmit, setIncorrectSubmit] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  console.log({ persist });
-  useEffect(() => {
-    localStorage.setItem('persist', persist);
-    if (persist) localStorage.setItem('accessToken', token);
-    else localStorage.removeItem('accessToken');
-  }, [persist, token]);
-
-  useEffect(() => {
-    console.log({ error });
-    if (isError) setIncorrectSubmit(error?.data?.message);
-  }, [error, isError]);
-
-  useEffect(() => {
-    if (isSuccess) navigate('/welcome');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess]);
+  // console.log({ persist });
 
   const forgetPasswordApi = () => {
     if (forgetPassword.email !== '' && forgetPassword.email !== 'Required') {
@@ -82,6 +68,24 @@ export default function Login() {
     const token = userData?.data?.token;
     dispatch(setCredentials({ token: token, user: user }));
   };
+  console.log({ persist });
+  console.log({ token });
+
+  useEffect(() => {
+    localStorage.setItem('persist', persist);
+    if (persist) localStorage.setItem('accessToken', token);
+    else localStorage.removeItem('accessToken');
+  }, [persist, token]);
+
+  useEffect(() => {
+    console.log({ error });
+    if (isError) setIncorrectSubmit(error?.data?.message);
+  }, [error, isError]);
+
+  useEffect(() => {
+    if (isSuccess) navigate('/welcome');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <>
@@ -188,6 +192,16 @@ export default function Login() {
                           {errors.password}
                         </p>
                       ) : null}
+                    </label>
+                    <label className="label label-text justify-start gap-x-1 text-sm font-medium text-gray-900 dark:text-gray-300">
+                      <input
+                        type="checkbox"
+                        className="checkbox checkbox-primary bg-white checkbox-sm
+                        "
+                        onChange={() => dispatch(setPersist())}
+                        checked={persist}
+                      />
+                      Remember me
                     </label>
                   </div>
                   <div className="text-center">

@@ -1,7 +1,7 @@
+import jwt_decode from 'jwt-decode';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { selectCurrentToken, selectCurrentUser } from './authSlice';
-import jwt_decode from 'jwt-decode';
+import { selectCurrentToken } from './authSlice';
 
 export const roles = {
   ADMIN: 'admin',
@@ -9,16 +9,14 @@ export const roles = {
 };
 
 const RequireAuth = ({ allowedRoles = [] }) => {
-  const user = useSelector(selectCurrentUser);
   const location = useLocation();
   const token = useSelector(selectCurrentToken);
 
   const decoded = token ? jwt_decode(token) : undefined;
   const role = decoded?.role || '';
 
-  console.log({ token });
-  console.log({ user });
-  console.log({ role });
+  // console.log({ token });
+  // console.log({ role });
 
   return token ? (
     allowedRoles.includes(role) ? (

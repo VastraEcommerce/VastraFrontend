@@ -1,0 +1,207 @@
+[
+  {
+    "_id": "62e95489dfa1843e963865ad",
+    "category": "Shirts",
+    "brand": "Vastra",
+    "brand_thumbnail": "Gwendolyn_Wisoky",
+    "title": "Mabrdfdfgfg",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aut eveniet quis sunt delectus reprehenderit voluptatum est ullam. Placeat, beatae.",
+    "ratingsAverage": 4.5,
+    "ratingsQuantity": 0,
+    "variants": [
+      {
+        "color": "#999933",
+        "sizes": [
+          {
+            "size": "XL",
+            "count": 62,
+            "price": 36
+          },
+          {
+            "size": "XXL",
+            "count": 52,
+            "price": 61
+          }
+        ],
+        "images": [
+          "images/products/2879899039_1_1_1_628x.progressive.jpg",
+          "images/products/2879899039_2_1_1_628x.progressive.jpg",
+          "images/products/2879899039_2_2_1_628x.progressive.jpg",
+          "images/products/2879899039_2_3_1_628x.progressive.jpg",
+          "images/products/2879899039_2_4_1_628x.progressive.jpg",
+          "images/products/2879899250_1_1_1_628x.progressive.jpg"
+        ]
+      },
+      {
+        "color": "#00B3E6",
+        "sizes": [
+          {
+            "size": "S",
+            "count": 19,
+            "price": 80
+          },
+          {
+            "size": "XXL",
+            "count": 4,
+            "price": 12
+          },
+          {
+            "size": "XL",
+            "count": 15,
+            "price": 69
+          },
+          {
+            "size": "M",
+            "count": 34,
+            "price": 65
+          },
+          {
+            "size": "L",
+            "count": 20,
+            "price": 57
+          }
+        ],
+        "images": [
+          "images/products/0278211506_2_2_1_490x.progressive.jpg",
+          "images/products/0278211506_1_1_1_628x.progressive.jpg",
+          "images/products/0278211506_2_1_1_490x.progressive.jpg",
+          "images/products/0278211506_2_3_1_490x.progressive.jpg"
+        ]
+      },
+      {
+        "color": "#66994D",
+        "sizes": [
+          {
+            "size": "M",
+            "count": 49,
+            "price": 32
+          },
+          {
+            "size": "XL",
+            "count": 75,
+            "price": 11
+          }
+        ],
+        "images": [
+          "images/products/2046033800_2_3_1_628x.progressive (2).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive (3).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive (4).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive (5).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive.jpg"
+        ]
+      },
+      {
+        "color": "#99E6E6",
+        "sizes": [
+          {
+            "size": "M",
+            "count": 49,
+            "price": 5
+          }
+        ],
+        "images": [
+          "images/products/2879899039_1_1_1_628x.progressive.jpg",
+          "images/products/2879899039_2_1_1_628x.progressive.jpg",
+          "images/products/2879899039_2_2_1_628x.progressive.jpg",
+          "images/products/2879899039_2_3_1_628x.progressive.jpg",
+          "images/products/2879899039_2_4_1_628x.progressive.jpg",
+          "images/products/2879899250_1_1_1_628x.progressive.jpg"
+        ]
+      },
+      {
+        "color": "#B33300",
+        "sizes": [
+          {
+            "size": "S",
+            "count": 47,
+            "price": 61
+          },
+          {
+            "size": "L",
+            "count": 11,
+            "price": 2
+          },
+          {
+            "size": "XL",
+            "count": 1,
+            "price": 35
+          },
+          {
+            "size": "XXL",
+            "count": 26,
+            "price": 49
+          },
+          {
+            "size": "M",
+            "count": 62,
+            "price": 54
+          }
+        ],
+        "images": [
+          "images/products/0278211506_2_2_1_490x.progressive.jpg",
+          "images/products/0278211506_1_1_1_628x.progressive.jpg",
+          "images/products/0278211506_2_1_1_490x.progressive.jpg",
+          "images/products/0278211506_2_3_1_490x.progressive.jpg"
+        ]
+      },
+      {
+        "color": "#E666B3",
+        "sizes": [
+          {
+            "size": "XXL",
+            "count": 68,
+            "price": 73
+          },
+          {
+            "size": "L",
+            "count": 10,
+            "price": 69
+          },
+          {
+            "size": "XL",
+            "count": 5,
+            "price": 10
+          },
+          {
+            "size": "M",
+            "count": 39,
+            "price": 30
+          }
+        ],
+        "images": [
+          "images/products/2046033800_2_3_1_628x.progressive (2).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive (3).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive (4).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive (5).jpg",
+          "images/products/2046033800_2_3_1_628x.progressive.jpg"
+        ]
+      },
+      {
+        "color": "#CCCC00",
+        "sizes": [
+          {
+            "size": "XL",
+            "count": 2,
+            "price": 58
+          },
+          {
+            "size": "XXXl",
+            "count": 46,
+            "price": 12
+          }
+        ],
+        "images": [
+          "images/products/2879899039_1_1_1_628x.progressive.jpg",
+          "images/products/2879899039_2_1_1_628x.progressive.jpg",
+          "images/products/2879899039_2_2_1_628x.progressive.jpg",
+          "images/products/2879899039_2_3_1_628x.progressive.jpg",
+          "images/products/2879899039_2_4_1_628x.progressive.jpg",
+          "images/products/2879899250_1_1_1_628x.progressive.jpg"
+        ]
+      }
+    ],
+    "createdAt": "2022-08-02T16:44:57.865Z",
+    "updatedAt": "2022-08-02T16:44:57.865Z",
+    "slug": "mabrdfdfgfg"
+  }
+]

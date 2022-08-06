@@ -1,19 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import authSlice from '../features/auth/authSlice';
 import { productApi } from '../services/productApi';
-import { usersApi } from '../services/usersApi';
-import { registerReducer, loginReducer } from './../pages/Account';
+import { apiSlice } from './api/apiSlice';
 
-export const store = configureStore( {
+export const store = configureStore({
   reducer: {
-    [ productApi.reducerPath ]: productApi.reducer,
-    [ usersApi.reducerPath ]: usersApi.reducer,
-    register: registerReducer,
-    login: loginReducer,
+    [productApi.reducerPath]: productApi.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    auth: authSlice.reducer,
+    // register: registerReducer,
+    // login: loginReducer,
   },
-  middleware: ( getDefaultMiddleware ) =>
-    getDefaultMiddleware().concat( productApi.middleware ).concat( usersApi.middleware ),
-} );
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(productApi.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
+});
 
 // Required for refetchOnFocus/refetchOnReconnect behaviors
-setupListeners( store.dispatch );
+setupListeners(store.dispatch);

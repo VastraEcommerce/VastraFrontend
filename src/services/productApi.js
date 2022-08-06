@@ -1,14 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { apiSlice } from '../app/api/apiSlice';
 
-export const productApi = createApi({
-  reducerPath: 'productApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_BASE_URL}api/v1/products`,
-  }),
+export const productApi = apiSlice.injectEndpoints({
   tagTypes: ['Product'],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => `/`,
+      query: () => `/products`,
       transformResponse: (response, meta, error) => response.data,
       providesTags: (result, error, arg) =>
         result
@@ -22,12 +18,12 @@ export const productApi = createApi({
           : ['Product'],
     }),
     getProductById: builder.query({
-      query: (id) => `/${id}`,
+      query: (id) => `products/${id}`,
       transformResponse: (response, meta, error) => response.data,
       providesTags: ['Product'],
     }),
     getProductReviews: builder.query({
-      query: (productId) => `/${productId}/reviews`,
+      query: (productId) => `products/${productId}/reviews`,
       transformResponse: (response, meta, arg) => response.data,
       providesTags: ['Reviews'],
     }),

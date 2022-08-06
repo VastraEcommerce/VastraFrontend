@@ -1,47 +1,40 @@
-import axios from "axios";
-import { Form, Formik } from "formik";
-import { BsFillBrushFill, BsFillKeyFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
-import { updateVal } from "./slice";
+import axios from 'axios';
+import { Form, Formik } from 'formik';
+import { BsFillBrushFill, BsFillKeyFill } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { updateVal } from './slice';
 
 const SignUpSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required")
-    .trim("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required')
+    .trim('Required'),
   email: Yup.string()
-    .email("Invalid email")
-    .required("Required")
-    .trim("Required")
+    .email('Invalid email')
+    .required('Required')
+    .trim('Required')
 
-    .test("email", "We Have This Email", async (inputValue) => {
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: inputValue }),
-      };
-      const response = await fetch(
+    .test('email', 'We Have This Email', async (inputValue) => {
+      const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}api/v1/users/isExist`,
-        requestOptions
+        { email: inputValue }
       );
-      const data = await response.json();
-      console.log(data.isExist);
       return !data.isExist;
     }),
-
   password: Yup.string()
-    .required("Please Enter your password")
-    .trim("Required")
+    .required('Please Enter your password')
+    .trim('Required')
     .matches(
+      // eslint-disable-next-line
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
   confirmPass: Yup.string()
-    .required("Please Enter your confirm password")
-    .oneOf([Yup.ref("password")], "Password must match"),
+    .required('Please Enter your confirm password')
+    .oneOf([Yup.ref('password')], 'Password must match'),
 });
 
 export default function Register() {
@@ -61,10 +54,10 @@ export default function Register() {
           <Formik
             validateOnChange={false}
             initialValues={{
-              name: "",
-              email: "",
-              password: "",
-              confirmPass: "",
+              name: '',
+              email: '',
+              password: '',
+              confirmPass: '',
             }}
             validationSchema={SignUpSchema}
             onSubmit={(values) => {
@@ -81,7 +74,7 @@ export default function Register() {
                     },
                   }) => {
                     dispatch(updateVal({ user, token }));
-                    navigate("/");
+                    navigate('/');
                   }
                 )
                 .catch((err) => console.log(err));
@@ -113,7 +106,7 @@ export default function Register() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           style={{
                             borderColor:
-                              errors.name && touched.name ? "red" : "inherit",
+                              errors.name && touched.name ? 'red' : 'inherit',
                           }}
                           placeholder="Hassan Sabry"
                           required
@@ -157,7 +150,7 @@ export default function Register() {
                       bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           style={{
                             borderColor:
-                              errors.email && touched.email ? "red" : "inherit",
+                              errors.email && touched.email ? 'red' : 'inherit',
                           }}
                           required
                           placeholder="name@flowbite.com"
@@ -194,8 +187,8 @@ export default function Register() {
                           style={{
                             borderColor:
                               errors.password && touched.password
-                                ? "red"
-                                : "inherit",
+                                ? 'red'
+                                : 'inherit',
                           }}
                           required
                           name="password"
@@ -231,8 +224,8 @@ export default function Register() {
                           style={{
                             borderColor:
                               errors.confirmPass && touched.confirmPass
-                                ? "red"
-                                : "inherit",
+                                ? 'red'
+                                : 'inherit',
                           }}
                           required
                           name="confirmPass"

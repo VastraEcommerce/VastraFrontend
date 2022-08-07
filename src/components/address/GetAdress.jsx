@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import DeleteAddress from "./DeleteAddress";
 import EditAddress from "./EditAddress";
-import { useGetUserQuery } from "../../services/usersApi";
+import { useGetUserByIdQuery } from "../../services/userApi";
 
 export default function GetAdress() {
-  const user = useSelector((state) => state.register.user);
+  const user = useSelector((state) => state.auth.user);
   //supose to modify the service in get user to send id dynamic
-  const { data, isLoading, isSuccess, isError } = useGetUserQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
+  const { data, isLoading, isSuccess, isError } = useGetUserByIdQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
   // console.log(data);
 
   return (

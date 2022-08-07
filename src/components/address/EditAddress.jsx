@@ -3,8 +3,11 @@ import { useSelector } from "react-redux";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { useUpdateAddressForUserMutation } from "../../services/usersApi";
-import { useGetUserByIdQuery } from "../../services/userApi";
+// import { useUpdateAddressForUserMutation } from "../../services/usersApi";
+import {
+  useGetUserByIdQuery,
+  useUpdateAddressForUserMutation,
+} from "../../services/userApi";
 
 export default function EditAddress({ thisAddress }) {
   const { user } = useSelector((state) => state.auth.user);

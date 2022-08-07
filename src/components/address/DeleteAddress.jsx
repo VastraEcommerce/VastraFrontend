@@ -1,8 +1,11 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import { useUpdateAddressForUserMutation } from "../../services/usersApi";
-import { useGetUserByIdQuery } from "../../services/userApi";
+// import { useUpdateAddressForUserMutation } from "../../services/usersApi";
+import {
+  useGetUserByIdQuery,
+  useUpdateAddressForUserMutation,
+} from "../../services/userApi";
 
 export default function DeleteAddress({ thisAddress }) {
   const { user } = useSelector((state) => state.auth.user);

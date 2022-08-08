@@ -11,6 +11,7 @@ import Layout from './components/Layout';
 import RequireAuth, { roles } from './features/auth/RequireAuth';
 import UserList from './test/UserList'; // for testing onley it will be removed
 import Welcome from './test/Welcome'; // for testing onley it will be removed
+// import Login from './test/Login'; // for testing onley it will be removed
 /* import AdminMain from './admin/AdminMain';
 import AdminLogin from './admin/pages/AdminLogin';
 import Products from './admin/pages/Products';

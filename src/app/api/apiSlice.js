@@ -3,7 +3,7 @@ import { logOut, setCredentials } from '../../features/auth/authSlice';
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: `${process.env.REACT_APP_BASE_URL}api/v1`,
-  // baseUrl: `http://localhost:5000/api/v1`, for testing
+  // baseUrl: `http://localhost:5000/api/v1`, // for testing
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -21,7 +21,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   console.log({ result });
   console.log({ isPersist: api.getState().auth.persist });
 
-  if (result?.error?.status === 403 || api.getState().auth.persist) {
+  if (result?.error?.status === 403) {
     console.log(`sending refresh token`);
     // send refresh token to get new access token
     const refreshResult = await baseQuery('/users/refresh', api, extraOptions);

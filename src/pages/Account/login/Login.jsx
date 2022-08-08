@@ -66,6 +66,7 @@ export default function Login() {
     console.log({ userData });
     const user = userData?.data?.user;
     const token = userData?.data?.token;
+    // if (!persist) dispatch(setPersist());
     dispatch(setCredentials({ token: token, user: user }));
   };
   console.log({ persist });

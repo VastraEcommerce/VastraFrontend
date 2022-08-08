@@ -2,14 +2,15 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../features/auth/authSlice';
 
+// import { useUpdateAddressForUserMutation } from "../../services/usersApi";
 import {
+  useGetUserByIdQuery,
   useUpdateAddressForUserMutation,
-  useGetUserQuery,
-} from '../../services/usersApi';
+} from '../../services/userApi';
 
 export default function DeleteAddress({ thisAddress }) {
-  const { user } = useSelector(selectCurrentUser);
-  const { data } = useGetUserQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
+  const { user } = useSelector((state) => state.auth.user);
+  const { data } = useGetUserByIdQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
   console.log(thisAddress);
   const [updateAddressForUser] = useUpdateAddressForUserMutation();
 

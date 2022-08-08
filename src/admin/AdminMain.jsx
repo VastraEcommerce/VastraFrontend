@@ -9,11 +9,21 @@ const AdminMain = () => {
         <Toolbar>Dashboard</Toolbar>
       </AppBar>
       <Box sx={{ display: "flex" }}>
-        <List component="nav">
+        {/* Sidebar */}
+        <List
+          component="nav"
+          sx={{
+            flex: "none",
+            width: 250,
+            py: "20px",
+            height: "calc(100vh - 64px)",
+          }}
+        >
           {mainListItems}
           <Divider sx={{ my: 1 }} />
           {secondaryListItems}
         </List>
+        <Divider sx={{ mx: 1 }} orientation="vertical" flexItem />
 
         {/* Main section */}
         <Outlet />

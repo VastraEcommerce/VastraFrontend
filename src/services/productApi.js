@@ -9,12 +9,12 @@ export const productApi = apiSlice.injectEndpoints({
       providesTags: (result, error, arg) =>
         result
           ? [
-              ...result.map(({ _id }) => ({
-                type: 'Product',
-                _id,
-              })),
-              'Product',
-            ]
+            ...result.map(({ _id }) => ({
+              type: 'Product',
+              _id,
+            })),
+            'Product',
+          ]
           : ['Product'],
     }),
     getProductById: builder.query({
@@ -27,6 +27,33 @@ export const productApi = apiSlice.injectEndpoints({
       transformResponse: (response, meta, arg) => response.data,
       providesTags: ['Reviews'],
     }),
+
+    addProduct: builder.mutation({
+      query: product => ({
+        url: "/",
+        method: "POST",
+        body: product,
+      }),
+      invalidatesTags: ["Product"]
+    }),
+
+    updateProduct: builder.mutation({
+      query: product => ({
+        url: `/${product.id}`,
+        method: "PUT",
+        body: product,
+      }),
+      invalidatesTags: ["Product"]
+    }),
+
+    deleteProduct: builder.mutation({
+      query: id => ({
+        url: `/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Product"]
+    }),
+
   }),
 });
 
@@ -34,4 +61,8 @@ export const {
   useGetAllProductsQuery,
   useGetProductByIdQuery,
   useGetProductReviewsQuery,
+
+  useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productApi;

@@ -3,15 +3,14 @@ import { useSelector } from 'react-redux';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+// import { useUpdateAddressForUserMutation } from "../../services/usersApi";
 import {
+  useGetUserByIdQuery,
   useUpdateAddressForUserMutation,
-  useGetUserQuery,
-} from '../../services/usersApi';
-import { selectCurrentUser } from '../../features/auth/authSlice';
-
+} from '../../services/userApi';
 export default function AddAddress() {
-  const { user } = useSelector(selectCurrentUser);
-  const { data } = useGetUserQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
+  const { user } = useSelector((state) => state.auth.user);
+  const { data } = useGetUserByIdQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
 
   const [expanded, setExpanded] = React.useState(false);
   const [updateAddressForUser] = useUpdateAddressForUserMutation();

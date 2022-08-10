@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { cityData } from "../address/citys";
 export default function CartTotal() {
   const [zip, setZip] = useState("");
   const [calc, setCalc] = useState(false);
@@ -34,9 +34,9 @@ export default function CartTotal() {
     });
   };
   const handleStripe = () => {};
-  console.log(cartTotal);
+
   return (
-    <div className='p-5 text-neutral border border-slate-300 my-8 drop-shadow-md '>
+    <div className='p-5 text-neutral border border-slate-300 my-8 drop-shadow-md rounded'>
       <h1 className='text-lg my-3'>CART TOTAL</h1>
       <p className='text-xm my-3'>Estimate Shipping and TAX</p>
       <p className='text-sm font-light my-3'>
@@ -62,8 +62,13 @@ export default function CartTotal() {
             onChange={handleCity}
             defaultValue='mansoura'
             className=' border border-slate-300 outline-none text-sm text-nuteral-800 hover:bg-white focus:bg-white shadow-sm   w-full p-2.5  bg-base-200  dark:placeholder-gray-400   '>
-            <option value='mansoura'>mansoura</option>
-            <option value='aga'>aga</option>
+            {cityData.results.map((city, index) => {
+              return (
+                <option value={city.name} key={index}>
+                  {city.name}
+                </option>
+              );
+            })}
           </select>
         </label>
       </div>

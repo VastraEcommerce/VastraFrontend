@@ -3,6 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import authSlice from '../features/auth/authSlice';
 import { productApi } from '../services/productApi';
 // import { usersApi } from '../services/usersApi';
+import { cartSlice } from './features/cartSlice';
 import { apiSlice } from './api/apiSlice';
 
 export const store = configureStore( {
@@ -10,6 +11,8 @@ export const store = configureStore( {
     [ productApi.reducerPath ]: productApi.reducer,
     [ apiSlice.reducerPath ]: apiSlice.reducer,
     auth: authSlice.reducer,
+    shoppingBag: cartSlice.reducer,
+
     // register: registerReducer,
     // login: loginReducer,
   },

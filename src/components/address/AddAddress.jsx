@@ -9,7 +9,7 @@ import {
   useUpdateAddressForUserMutation,
 } from '../../services/userApi';
 export default function AddAddress() {
-  const { user } = useSelector((state) => state.auth.user);
+  const  user  = useSelector((state) => state.auth.user);
   const { data } = useGetUserByIdQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
 
   const [expanded, setExpanded] = React.useState(false);
@@ -49,8 +49,8 @@ export default function AddAddress() {
   };
   const handleSubmit = async () => {
     await updateAddressForUser({
-      ...data.data,
-      address: [...data.data.address, newAddress],
+      ...data,
+      address: [...data.address, newAddress],
     });
   };
   const handleChange = () => {

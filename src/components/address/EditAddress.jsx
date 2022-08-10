@@ -10,7 +10,7 @@ import {
 } from '../../services/userApi';
 
 export default function EditAddress({ thisAddress }) {
-  const { user } = useSelector((state) => state.auth.user);
+  const user  = useSelector((state) => state.auth.user);
   const { data } = useGetUserByIdQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
 
   const [expanded, setExpanded] = React.useState(false);
@@ -58,8 +58,8 @@ export default function EditAddress({ thisAddress }) {
   };
   const handleUpdate = async () => {
     await updateAddressForUser({
-      ...data.data,
-      address: UpdateAdress(data.data.address),
+      ...data,
+      address: UpdateAdress(data.address),
     });
   };
   const handleChange = () => {

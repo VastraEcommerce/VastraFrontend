@@ -6,10 +6,12 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { MdAdd } from "react-icons/md";
-import { useGetUserByIdQuery } from "../../services/userApi";
+import { useGetMeQuery } from "../../services/currentUserApi";
 export default function AcountDetails() {
   const user = useSelector((state) => state.auth.user);
-  const { data, isLoading, isSuccess, isError } = useGetUserByIdQuery(user._id);
+  window.localStorage.setItem("userId", user._id);
+  const userID = window.localStorage.getItem("userId");
+  const { data, isLoading, isSuccess, isError } = useGetMeQuery(userID);
   //if you want to test add "62ec135c16eeaa1abda160b2"
   const firstName = isSuccess ? data.name.split(" ")[0] : "mytEAM ";
   const lastName = isSuccess

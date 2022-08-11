@@ -102,8 +102,10 @@ const Navbar = (props) => {
                 </button>
                 <label tabIndex={0} className='btn btn-ghost btn-circle'>
                   <div className='indicator'>
-                    <HiOutlineShoppingCart className='text-2xl' />
-                    <span className='badge badge-sm indicator-item'>8</span>
+                    <Link to='/cart'>
+                      <HiOutlineShoppingCart className='text-2xl' />
+                      <span className='badge badge-sm indicator-item'>8</span>
+                    </Link>
                   </div>
                 </label>
                 <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>

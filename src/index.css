@@ -3,11 +3,39 @@
 @tailwind utilities;
 
 /* Logo Font */
-@import url('https://fonts.googleapis.com/css2?family=Qwigley&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Qwigley&display=swap");
 .activeImage {
   filter: drop-shadow(0px 1px 2px #000000) brightness(1);
 }
 
 .normalImage {
   filter: drop-shadow(0px 3px 1px #000000) brightness(0.5);
+}
+.header {
+  position: relative;
+  width: fit-content;
+  padding: 10px 20px;
+  text-align: center;
+  margin: 0 auto 20px;
+  border: 2px solid white;
+  border-radius: 10%;
+  transition: 0.3s;
+}
+.header:before,
+.header:after {
+  content: "";
+  position: absolute;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: rgb(37 99 235 / 1);
+  border-radius: 50%;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+.header:before {
+  left: -30px;
+}
+.header:after {
+  right: -30px;
 }

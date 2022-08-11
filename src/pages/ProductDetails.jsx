@@ -33,7 +33,7 @@ export default function ProductDetails() {
   useEffect(() => {
     setVariant(data?.variants[0]);
     setColor(data?.variants[0]?.color);
-    setSize(data?.variants[0]?.color);
+    setSize(data?.variants[0]?.sizes[0]);
   }, [data]);
 
   useEffect(() => {

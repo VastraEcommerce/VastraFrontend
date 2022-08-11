@@ -46,11 +46,12 @@ export default function Register() {
   // }, 250);
   return (
     <>
-      <h1 className="text-center p-3  bg-slate-700  text-white my-2 rounded-md">
+      {/* <h1 className="text-center p-3  bg-slate-700  text-white my-2 rounded-md">
         Create an Account
-      </h1>
+      </h1> */}
       <div className="w-full md:w-96 md:max-w-full mx-auto">
-        <div className="p-6 border border-gray-300 sm:rounded-md  dark:bg-gray-700">
+        <div className="p-6 border border-gray-300 sm:rounded-md  dark:bg-gray-700 my-8 drop-shadow-x">
+          <h1 className="text-white text-2xl font-bold header">Sign Up</h1>
           <Formik
             validateOnChange={false}
             initialValues={{

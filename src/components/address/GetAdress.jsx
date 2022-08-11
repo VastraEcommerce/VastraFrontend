@@ -1,13 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import DeleteAddress from "./DeleteAddress";
 import EditAddress from "./EditAddress";
-import { useGetUserQuery } from "../../services/usersApi";
+import { useGetMeQuery } from "../../services/currentUserApi";
 
 export default function GetAdress() {
-  const user = useSelector((state) => state.register.user);
+  const userID = window.localStorage.getItem("userId");
   //supose to modify the service in get user to send id dynamic
-  const { data, isLoading, isSuccess, isError } = useGetUserQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
+  const { data, isLoading, isSuccess, isError } = useGetMeQuery(userID); //if you want to test add "62ec135c16eeaa1abda160b2"
   // console.log(data);
 
   return (
@@ -17,7 +17,7 @@ export default function GetAdress() {
       {isError && <p className='mx-auto my-10'>Something Went wrong</p>}
       {isSuccess && (
         <div>
-          {data.data.address.map((address, i) => {
+          {data.address.map((address, i) => {
             return (
               <div className='col' key={i}>
                 <div className=' my-2 mx-16 flex p-2  border-b '>

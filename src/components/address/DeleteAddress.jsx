@@ -1,16 +1,15 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 import {
-  useUpdateAddressForUserMutation,
-  useGetUserQuery,
-} from "../../services/usersApi";
+  useGetMeQuery,
+  useUpdateMeMutation,
+} from "../../services/currentUserApi";
 
 export default function DeleteAddress({ thisAddress }) {
-  const { user } = useSelector((state) => state.register.user);
-  const { data } = useGetUserQuery(user._id); //if you want to test add "62ec135c16eeaa1abda160b2"
-  console.log(thisAddress);
-  const [updateAddressForUser] = useUpdateAddressForUserMutation();
+  const userID = window.localStorage.getItem("userId");
+  const { data } = useGetMeQuery(userID); //if you want to test add "62ec135c16eeaa1abda160b2"
+  const [updateAddressForUser] = useUpdateMeMutation();
 
   const DeleteAdress = (arrayOfAddress) => {
     const addressArray = arrayOfAddress.filter((object) => {
@@ -20,10 +19,9 @@ export default function DeleteAddress({ thisAddress }) {
   };
   const handleDelete = async () => {
     await updateAddressForUser({
-      ...data.data,
-      address: DeleteAdress(data.data.address),
+      ...data,
+      address: DeleteAdress(data.address),
     });
-    console.log(DeleteAdress(data.data.address));
   };
 
   return (

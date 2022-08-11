@@ -27,7 +27,6 @@ const Login = () => {
   useEffect(() => {
     localStorage.setItem('persist', persist);
     if (persist) localStorage.setItem('accessToken', token);
-    else localStorage.removeItem('accessToken');
   }, [persist, token]);
 
   useEffect(() => {

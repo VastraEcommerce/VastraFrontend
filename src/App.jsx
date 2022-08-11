@@ -33,7 +33,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
-        <Route path="cart" element={<div>Cart</div>} />
+        <Route path="/cart" element={<ShoppingBag />} />
         <Route path="products">
           <Route index element={<div>Products</div>} />
           <Route path=":productId" element={<ProductDetails />} />

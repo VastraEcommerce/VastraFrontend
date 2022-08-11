@@ -1,24 +1,31 @@
-import About from './pages/About';
-import Login from './pages/Account/login/Login';
-import Register from './pages/Account/register/Register';
-import Address from './pages/Address';
-import Contact from './pages/Contact';
-import Home from './pages/Home';
-import ProductDetails from './pages/ProductDetails';
-import Profile from './pages/Profile';
-import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import RequireAuth, { roles } from './features/auth/RequireAuth';
-import UserList from './test/UserList'; // for testing onley it will be removed
-import Welcome from './test/Welcome'; // for testing onley it will be removed
-/* import AdminMain from './admin/AdminMain';
-import AdminLogin from './admin/pages/AdminLogin';
-import Products from './admin/pages/Products';
-import Dashboard from './admin/pages/Dashboard'; */
+import About from "./pages/About";
+import Login from "./pages/Account/login/Login";
+import Register from "./pages/Account/register/Register";
+import Address from "./pages/Address";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
+import Profile from "./pages/Profile";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
+import RequireAuth, { roles } from "./features/auth/RequireAuth";
+import UserList from "./test/UserList"; // for testing onley it will be removed
+import Welcome from "./test/Welcome"; // for testing onley it will be removed
+import AdminMain from "./admin/AdminMain";
+import AdminLogin from "./admin/pages/AdminLogin";
+import Products from "./admin/pages/Products";
+import Dashboard from "./admin/pages/Dashboard";
 
 function App() {
   return (
     <Routes>
+      <Route path="/admin">
+        <Route path="login" element={<AdminLogin />} />
+        <Route element={<AdminMain />}>
+          <Route index element={<Dashboard />} />
+          <Route path="products" element={<Products />} />
+        </Route>
+      </Route>
       <Route path="/" element={<Layout />}>
         {/* Puplic Routes */}
         <Route index element={<Home />} />

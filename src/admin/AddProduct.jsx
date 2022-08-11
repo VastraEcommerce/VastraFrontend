@@ -1,27 +1,45 @@
-import { Formik, Form } from "formik";
+import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
-// import { makeStyles } from "@mui/material/core/styles";
+
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Textfield from "./FormsUI/Textfield";
-// import Button from "./FormsUI/Button";
-import Color from "./FormsUI/Color";
-import Colorfield from "./FormsUI/Colorfield";
-import { Button, Divider } from "@mui/material";
+import { Divider, Button as MuiButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Stack from "@mui/material/Stack";
+
+import Textfield from "./FormsUI/Textfield";
+import ButtonSubmit from "./FormsUI/Button";
+import Colorfield from "./FormsUI/Colorfield";
+import ImageUpload from "./FormsUI/ImageUpload";
+
+import {
+  useAddProductMutation,
+  useUploadProductImagesMutation,
+} from "../services/productApi";
+import { useState } from "react";
+
+const size = { size: "", count: "", price: "" };
+const variant = {
+  color: "#000000",
+  sizes: [{ ...size }],
+  images: [],
+};
+
+const Button = styled(MuiButton)({
+  height: "56px",
+});
 
 const INITIAL_FORM_STATE = {
   brand: "",
   title: "",
   category: "",
   description: "",
-  brandThumbnail: "",
+  variants: [
+    {
+      ...variant,
+    },
+  ],
 };
 
 const FORM_VALIDATION = Yup.object().shape({
@@ -29,14 +47,32 @@ const FORM_VALIDATION = Yup.object().shape({
   title: Yup.string().required("Required"),
   category: Yup.string().required("Required"),
   description: Yup.string().required("Required"),
-  brandThumbnail: Yup.string().required("Required"),
-  price: Yup.number()
-    .integer()
-    .typeError("Please enter a valid price")
-    .required("Required"),
+  variants: Yup.array(
+    Yup.object({
+      color: Yup.string().required("Required"),
+      sizes: Yup.array(
+        Yup.object({
+          size: Yup.string().required("Required"),
+          count: Yup.number()
+            .integer()
+            .typeError("Please enter a valid price")
+            .required("Required"),
+          price: Yup.number()
+            .integer()
+            .typeError("Please enter a valid price")
+            .required("Required"),
+        })
+      ).min(1),
+      images: Yup.array(Yup.string()).min(1),
+    })
+  ).min(1),
 });
 
 const AddProduct = () => {
+  const [uploadImages] = useUploadProductImagesMutation();
+  const [addProduct] = useAddProductMutation();
+
+  const [images, setImages] = useState();
   return (
     <Grid
       container
@@ -46,77 +82,159 @@ const AddProduct = () => {
     >
       <Grid item xs={12}>
         <Container maxWidth="md">
-          {/* <div className={classes.formWrapper}> */}
           <Formik
             initialValues={{
               ...INITIAL_FORM_STATE,
             }}
             validationSchema={FORM_VALIDATION}
-            onSubmit={(values) => {
+            onSubmit={async (values) => {
               console.log(values);
+              const fd = new FormData();
+
+              images.forEach((image) => {
+                fd.append("images", image, image.uuid);
+              });
+              try {
+                // await uploadImages(fd);
+                await addProduct({ ...values });
+              } catch (error) {
+                console.log(error);
+              }
             }}
           >
-            <Form>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Typography>Product details</Typography>
-                </Grid>
+            {({ values, errors }) => (
+              <Form>
+                <pre>{JSON.stringify({ values, errors }, undefined, 2)}</pre>
+                <pre>{JSON.stringify({ ...values }, undefined, 2)}</pre>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography>Product details</Typography>
+                  </Grid>
 
-                <Grid item xs={6}>
-                  <Textfield name="brand" label="Brand" />
-                </Grid>
+                  <Grid item xs={6}>
+                    <Textfield name="brand" label="Brand" />
+                  </Grid>
 
-                <Grid item xs={6}>
-                  <Textfield name="title" label="Title" />
-                </Grid>
+                  <Grid item xs={6}>
+                    <Textfield name="title" label="Title" />
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <Textfield
-                    multiline
-                    rows={4}
-                    name="description"
-                    label="Description"
-                  />
-                </Grid>
+                  <Grid item xs={12}>
+                    <Textfield
+                      multiline
+                      rows={4}
+                      name="description"
+                      label="Description"
+                    />
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <Textfield name="category" label="Category" />
-                </Grid>
+                  <Grid item xs={12}>
+                    <Textfield name="category" label="Category" />
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <Divider orientation="horizontal" flexItem sx={{ my: 1 }} />
-                </Grid>
+                  <Grid item xs={12}>
+                    <Divider orientation="horizontal" flexItem sx={{ my: 1 }} />
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <Typography>Variants details</Typography>
-                </Grid>
+                  <Grid item xs={12}>
+                    <Typography>Variants details</Typography>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <Colorfield name="color" label="Color" />
-                  {/* <Color name="color" label="Color" /> */}
-                </Grid>
+                  <Grid item xs={12}>
+                    <FieldArray name="variants">
+                      {({ push, remove }) => (
+                        <Grid container spacing={2}>
+                          {values.variants.map((variant, i) => (
+                            <Grid item xs={12} key={i}>
+                              <Grid container spacing={2}>
+                                <Grid item xs={4}>
+                                  <Colorfield
+                                    name={`variants[${i}].color`}
+                                    label="Color"
+                                    helperText={values.variants[i].color}
+                                  />
+                                </Grid>
+                                <Grid item>
+                                  <Button
+                                    size="large"
+                                    className=" bg-red-600"
+                                    color="error"
+                                    variant="contained"
+                                    disabled={i === 0}
+                                    onClick={() => remove(i)}
+                                    startIcon={<DeleteIcon />}
+                                  >
+                                    Remove Variant
+                                  </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <ImageUpload
+                                    values={values}
+                                    i={i}
+                                    setImagesState={setImages}
+                                  />
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <FieldArray name={`variants[${i}].sizes`}>
+                                    {({ push, remove }) => (
+                                      <Grid container spacing={2}>
+                                        {variant.sizes.map((size, j) => (
+                                          <Grid key={j} item xs={12}>
+                                            <VariantSize
+                                              j={j}
+                                              i={i}
+                                              remove={remove}
+                                              push={push}
+                                            />
+                                          </Grid>
+                                        ))}
+                                        <Grid item xs={12}>
+                                          <Button
+                                            className="btn btn-success"
+                                            color="error"
+                                            variant="contained"
+                                            onClick={() => push(size)}
+                                          >
+                                            Add Size
+                                          </Button>
+                                        </Grid>
+                                      </Grid>
+                                    )}
+                                  </FieldArray>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <Divider
+                                    orientation="horizontal"
+                                    flexItem
+                                    sx={{ my: 1 }}
+                                  />
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          ))}
 
-                <VariantSize />
-                <VariantSize />
-                <VariantSize />
-                <Grid item xs={12}>
-                  <Button
-                    className="btn btn-success"
-                    color="error"
-                    variant="contained"
-                  >
-                    Add Size
-                  </Button>
-                </Grid>
-                <UploadButtons />
+                          <Grid item xs={12}>
+                            <Button
+                              className="btn"
+                              color="error"
+                              variant="contained"
+                              onClick={() => push(variant)}
+                            >
+                              Add Variant
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      )}
+                    </FieldArray>
+                  </Grid>
 
-                {/* <Grid item xs={12}>
-                  <Button>Submit Form</Button>
-                </Grid> */}
-              </Grid>
-            </Form>
+                  <Grid item xs={12}>
+                    <ButtonSubmit>Submit Form</ButtonSubmit>
+                  </Grid>
+                </Grid>
+              </Form>
+            )}
           </Formik>
-          {/* </div> */}
         </Container>
       </Grid>
     </Grid>
@@ -125,50 +243,31 @@ const AddProduct = () => {
 
 export default AddProduct;
 
-const Input = styled("input")({
-  display: "none",
-});
-
-export function UploadButtons() {
-  return (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      <label htmlFor="contained-button-file">
-        <Input
-          accept="image/*"
-          id="contained-button-file"
-          multiple
-          type="file"
-        />
-
-        <Button
-          startIcon={<PhotoCamera />}
-          variant="contained"
-          component="span"
-        >
-          Upload
-        </Button>
-      </label>
-    </Stack>
-  );
-}
-
-function VariantSize({}) {
+function VariantSize({ j, i, remove }) {
   return (
     <>
-      {" "}
-      <Grid item xs={4}>
-        <Textfield name="size" label="Size" />
-      </Grid>
-      <Grid item xs={4}>
-        <Textfield name="count" label="Stock" />
-      </Grid>
-      <Grid item xs={3}>
-        <Textfield name="price" label="Price" />
-      </Grid>
-      <Grid item xs={1}>
-        <Button className="btn bg-red-600" color="error" variant="contained">
-          <DeleteIcon />
-        </Button>
+      <Grid container spacing={2}>
+        <Grid item flex={1}>
+          <Textfield name={`variants.${i}.sizes.${j}.size`} label="Size" />
+        </Grid>
+        <Grid item flex={1}>
+          <Textfield name={`variants.${i}.sizes.${j}.count`} label="Stock" />
+        </Grid>
+        <Grid item flex={1}>
+          <Textfield name={`variants.${i}.sizes.${j}.price`} label="Price" />
+        </Grid>
+        <Grid item>
+          <Button
+            fullWidth
+            className="bg-red-600"
+            color="error"
+            variant="contained"
+            disabled={j === 0}
+            onClick={() => remove(j)}
+          >
+            <DeleteIcon />
+          </Button>
+        </Grid>
       </Grid>
     </>
   );

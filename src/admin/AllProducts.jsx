@@ -77,7 +77,7 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    {/* <TableCell>Color</TableCell> */}
+                    <TableCell>Color</TableCell>
                     <TableCell>Size</TableCell>
                     <TableCell align="right">Stock</TableCell>
                     <TableCell align="right">Price ($)</TableCell>
@@ -85,55 +85,28 @@ function Row(props) {
                 </TableHead>
 
                 <TableBody>
-                  <TableRow>
-                    <TableCell colSpan={12} sx={{ p: 0 }}>
-                      {row.variants.map((variant) => (
-                        <Table
-                          sx={{
-                            width: "100%",
-                          }}
-                          size="small"
-                          key={variant.color}
-                        >
-                          <TableHead>
-                            <TableRow>
-                              <TableCell
-                                sx={{
-                                  backgroundColor: variant.color,
-                                  width: "100px",
-                                }}
-                              ></TableCell>
-                              <TableCell>{variant.color}</TableCell>
-                            </TableRow>
-                          </TableHead>
-
-                          <TableBody>
-                            {variant.sizes.map((size) => (
-                              <TableRow key={size.size}>
-                                <TableCell>{size.size}</TableCell>
-                                <TableCell align="right">
-                                  {size.count}
-                                </TableCell>
-                                <TableCell align="right">
-                                  {size.price}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      ))}
-                    </TableCell>
-                  </TableRow>
-                  {/* {variant.sizes.map((size) => (
-                        <TableRow key={variant.color}>
-                          <Box key={size.size}>
-                            <TableCell>{variant.color}</TableCell>
-                            <TableCell>{size.size}</TableCell>
-                            <TableCell align="right">{size.count}</TableCell>
-                            <TableCell align="right">{size.price}</TableCell>
-                          </Box>
-                        </TableRow>
-                      ))} */}
+                  {row.variants.map((variant) =>
+                    variant.sizes.map((size) => (
+                      <TableRow key={size.size}>
+                        <TableCell>
+                          {/* {variant.color}{" "} */}
+                          <div
+                            style={{
+                              backgroundColor: variant.color,
+                              width: "20px",
+                              height: "20px",
+                              borderRadius: "50%",
+                            }}
+                          >
+                            {" "}
+                          </div>
+                        </TableCell>
+                        <TableCell>{size.size}</TableCell>
+                        <TableCell align="right">{size.count}</TableCell>
+                        <TableCell align="right">{size.price}</TableCell>
+                      </TableRow>
+                    ))
+                  )}
                 </TableBody>
               </Table>
             </Box>

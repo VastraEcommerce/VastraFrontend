@@ -20,7 +20,7 @@ export const cartItemApi = apiSlice.injectEndpoints({
     getCartItemById: builder.query({
       query: (id) => `/cartItems/${id}`,
       transformResponse: (response, meta, error) => response.data,
-      invalidatesTags: ['Cart'],
+      providesTags: ['Cart'],
     }),
     addCartItem: builder.mutation({
       query: (cartItem) => ({

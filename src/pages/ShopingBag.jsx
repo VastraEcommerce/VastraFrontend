@@ -2,13 +2,14 @@ import React from "react";
 import EmptyBag from "../components/shopingBag/EmptyBag";
 import ProductVeiw from "../components/shopingBag/ProductVeiw";
 import CartTotal from "../components/shopingBag/CartTotal";
+import { useSelector } from "react-redux";
 
 export default function ShopingBag() {
-  const data = true;
+  const Bag = useSelector((state) => state.shoppingBag);
   return (
     <>
-      {!data && <EmptyBag />}
-      {data && (
+      {!Bag.length && <EmptyBag />}
+      {Bag.length && (
         <div className=''>
           <h1 className='mb-14 mt-16 text-3xl text-neutral mx-auto text-center'>
             Shopping Bag

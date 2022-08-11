@@ -13,7 +13,6 @@ import {
 export default function EditAddress({ thisAddress }) {
   const userID = window.localStorage.getItem("userId");
   const { data, isLoading, isError } = useGetMeQuery(userID); //if you want to test add "62ec135c16eeaa1abda160b2"
-
   const [expanded, setExpanded] = React.useState(false);
   const [updateAddressForUser] = useUpdateMeMutation();
   const [newAddress, setNewAddress] = React.useState({
@@ -34,7 +33,7 @@ export default function EditAddress({ thisAddress }) {
   const handleBuildig = (event) => {
     setNewAddress({
       ...newAddress,
-      building: event.target.value,
+      buliding: event.target.value,
     });
   };
   const handleCity = (event) => {
@@ -62,6 +61,7 @@ export default function EditAddress({ thisAddress }) {
       ...data,
       address: UpdateAdress(data.address),
     });
+    setExpanded(!expanded);
   };
   const handleChange = () => {
     setExpanded(!expanded);

@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-import productImage from "../../images/women.png";
+// import productImage from "../../images/women.png";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-export default function Product(productInfo) {
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../app/features/cartSlice";
+export default function Product({ product }) {
+  const dispatch = useDispatch();
   const [quntity, setQuntity] = useState("1");
   const handleValue = (event) => {
     setQuntity(event.target.value);
   };
-  const price = 16;
-  const total = price * quntity;
+  const handelDeleteProduct = (event) => {
+    dispatch(deleteProduct(product));
+    console.log(event.target);
+  };
+  const total = product.price * quntity;
   const navigate = useNavigate();
   return (
     <tr>
       <td>
         <div className='flex items-center space-x-3 '>
-          <button>
+          <button onClick={handelDeleteProduct}>
             {" "}
             <RiDeleteBinLine className={"text-nuetral "} />
           </button>
@@ -22,18 +28,18 @@ export default function Product(productInfo) {
           <div className='sm:flex items-center space-x-3'>
             <div className='min-w-[4rem] max-w-[12rem] hover:cursor-pointer'>
               <img
-                src={productImage}
+                src={`${process.env.REACT_APP_BASE_URL}${product.image}`}
                 alt='Product Pic'
                 className='w-full '
-                onClick={() => navigate(`/products/${1}`)}
+                onClick={() => navigate(`/products/${product.productId}`)}
               />
             </div>
-            <div className='text-neutral'>Belted trousers</div>
+            <div className='text-neutral'>{product.brand}</div>
           </div>
         </div>
       </td>
       <td>
-        <p className='text-xm md:text-sm'>{`$${price}`}</p>
+        <p className='text-xm md:text-sm'>${product.price}</p>
       </td>
       <td>
         {" "}

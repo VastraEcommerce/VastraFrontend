@@ -3,6 +3,7 @@ import Login from "./pages/Account/login/Login";
 import Register from "./pages/Account/register/Register";
 import Address from "./pages/Address";
 import Contact from "./pages/Contact";
+import ShoppingBag from "./pages/ShopingBag";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import Profile from "./pages/Profile";

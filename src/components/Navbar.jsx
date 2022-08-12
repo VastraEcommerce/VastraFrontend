@@ -3,11 +3,11 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { Logo } from "./Logo";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Accordion from "./Accordion";
-
+import { useGetAllCartItemsForCurrentUserQuery } from ".././services/cartItemsApi";
 const Navbar = (props) => {
-  const shoppingBaag = useSelector((state) => state.shoppingBag);
+  const { data, isSuccess } = useGetAllCartItemsForCurrentUserQuery();
+
   return (
     <>
       {/* Drawer */}
@@ -106,9 +106,11 @@ const Navbar = (props) => {
                   <div className='indicator'>
                     <Link to='/cart'>
                       <HiOutlineShoppingCart className='text-2xl' />
-                      <span className='badge badge-sm indicator-item'>
-                        {shoppingBaag.length}
-                      </span>
+                      {isSuccess && (
+                        <span className='badge badge-sm indicator-item'>
+                          {data.length}
+                        </span>
+                      )}
                     </Link>
                   </div>
                 </label>

@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-// import productImage from "../../images/women.png";
+
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteProduct } from "../../app/features/cartSlice";
+import { useRemoveCartItemMutation } from "../../services/cartItemsApi";
+
 export default function Product({ product }) {
-  const dispatch = useDispatch();
+  const [removeCartItem] = useRemoveCartItemMutation();
   const [quntity, setQuntity] = useState("1");
   const handleValue = (event) => {
     setQuntity(event.target.value);
   };
   const handelDeleteProduct = (event) => {
-    dispatch(deleteProduct(product));
-    console.log(event.target);
+    removeCartItem(product._id);
   };
   const total = product.price * quntity;
   const navigate = useNavigate();

@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 
 import { RiDeleteBinLine } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useRemoveCartItemMutation } from "../../services/cartItemsApi";
+import { calcToTalPrice } from "../../app/features/cartSlice";
+import {
+  useRemoveCartItemMutation,
+  useUpdateCartItemMutation,
+} from "../../services/cartItemsApi";
 
 export default function Product({ product }) {
   const [removeCartItem] = useRemoveCartItemMutation();
+  const [updateCartItem] = useUpdateCartItemMutation();
   const [quntity, setQuntity] = useState("1");
-  const handleValue = (event) => {
+  const total = product.price * quntity;
+  const dispatch = useDispatch();
+  const handleBlur = async (event) => {
+    await updateCartItem(product._id, { quantity: quntity });
+    dispatch(calcToTalPrice(total));
+  };
+  const handleChange = (event) => {
     setQuntity(event.target.value);
   };
-  const handelDeleteProduct = (event) => {
-    removeCartItem(product._id);
+  const handelDeleteProduct = async (event) => {
+    await removeCartItem(product._id);
   };
-  const total = product.price * quntity;
+
   const navigate = useNavigate();
   return (
     <tr>
@@ -44,12 +56,13 @@ export default function Product({ product }) {
         {" "}
         <input
           type='number'
-          min='1'
-          max='100'
+          // min='1'
+          // max='100'
           className='px-5 border border-slate-300 outline-none text-sm text-nuteral-800 hover:bg-white focus:bg-white shadow-sm   w-full p-2.5  bg-base-200  dark:placeholder-gray-400   '
           placeholder='1'
           name='quntity'
-          onChange={handleValue}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
       </td>
       <td>

@@ -19,7 +19,7 @@ export default function AcountDetails() {
       ? data.name.split(" ")[1]
       : "vastra"
     : " ";
-  console.log(lastName);
+
   return (
     <div>
       {isLoading && <p className='mx-auto my-10'>loading...</p>}
@@ -50,7 +50,14 @@ export default function AcountDetails() {
             </div>
             <div className=' my-2 flex p-2  border-b '>
               <p className=' font-light'>COUNTRY:</p>
-              <p className='mx-auto'>{data.address[0].country.toUpperCase()}</p>
+              {!data.address.length && (
+                <p className='mx-auto'>Vastraa Location</p>
+              )}
+              {data.address.length && (
+                <p className='mx-auto'>
+                  {data.address[0].country.toUpperCase()}
+                </p>
+              )}
             </div>
             <div className='my-14 text-center mb-28'>
               <Link to='/profile/address'>

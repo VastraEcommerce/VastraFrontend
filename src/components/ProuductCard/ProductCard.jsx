@@ -52,14 +52,14 @@ export default function ProductCard({ productInfo }) {
     image: variant.images[0],
     quantity: 1,
   });
-  const addProductToBag = () => {
+  const addProductToBag = async() => {
     setBagVarient({
       ...bagVarient,
       price: size?.price,
       size: size.size,
       image: variant?.images[0],
     });
-    addCartItem(bagVarient);
+    await addCartItem(bagVarient);
   };
 
   return (

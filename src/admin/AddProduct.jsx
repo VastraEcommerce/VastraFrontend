@@ -18,6 +18,7 @@ import {
   useUploadProductImagesMutation,
 } from "../services/productApi";
 import { useState } from "react";
+import { ValidationError } from "yup";
 
 const size = { size: "", count: "", price: "" };
 const variant = {
@@ -62,7 +63,22 @@ const FORM_VALIDATION = Yup.object().shape({
             .typeError("Please enter a valid price")
             .required("Required"),
         })
-      ).min(1),
+      )
+        .min(1)
+        .test((sizes) => {
+          sizes = sizes.map((size) => size.size?.toLocaleLowerCase());
+          const hasDuplicates = (arr) => arr.length !== new Set(arr).size;
+
+          if (hasDuplicates(sizes)) {
+            return new ValidationError(
+              "Sizes must be unique",
+              undefined,
+              "sizes"
+            );
+          }
+
+          return true;
+        }),
       images: Yup.array(Yup.string()).min(1),
     })
   ).min(1),
@@ -95,7 +111,7 @@ const AddProduct = () => {
                 fd.append("images", image, image.uuid);
               });
               try {
-                // await uploadImages(fd);
+                await uploadImages(fd);
                 await addProduct({ ...values });
               } catch (error) {
                 console.log(error);
@@ -105,7 +121,6 @@ const AddProduct = () => {
             {({ values, errors }) => (
               <Form>
                 <pre>{JSON.stringify({ values, errors }, undefined, 2)}</pre>
-                <pre>{JSON.stringify({ ...values }, undefined, 2)}</pre>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Typography>Product details</Typography>
@@ -189,14 +204,31 @@ const AddProduct = () => {
                                           </Grid>
                                         ))}
                                         <Grid item xs={12}>
-                                          <Button
-                                            className="btn btn-success"
-                                            color="error"
-                                            variant="contained"
-                                            onClick={() => push(size)}
+                                          <Grid
+                                            container
+                                            spacing={2}
+                                            sx={{ alignItems: "center" }}
                                           >
-                                            Add Size
-                                          </Button>
+                                            <Grid item>
+                                              <Button
+                                                className="btn btn-success"
+                                                color="error"
+                                                variant="contained"
+                                                onClick={() => push(size)}
+                                              >
+                                                Add Size
+                                              </Button>
+                                            </Grid>
+
+                                            <Grid item>
+                                              {typeof errors.sizes ===
+                                              "string" ? (
+                                                <Typography color="red">
+                                                  {errors.sizes}
+                                                </Typography>
+                                              ) : null}
+                                            </Grid>
+                                          </Grid>
                                         </Grid>
                                       </Grid>
                                     )}

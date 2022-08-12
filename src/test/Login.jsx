@@ -23,7 +23,6 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
 
-  console.log({ persist });
   useEffect(() => {
     localStorage.setItem('persist', persist);
     if (persist) localStorage.setItem('accessToken', token);
@@ -42,7 +41,6 @@ const Login = () => {
 
     try {
       const userData = await login({ email: user, password: pwd }).unwrap();
-      console.log({ userData });
       dispatch(setCredentials({ token: userData.token, user: userData.user }));
       setUser('');
       setPwd('');

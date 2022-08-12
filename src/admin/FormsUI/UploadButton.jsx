@@ -23,7 +23,6 @@ export function UploadButton() {
           type="file"
           onChange={() => {
             setImgs(imgsRef.current?.files);
-            console.log(imgsRef.current?.files[0]);
           }}
         />
 

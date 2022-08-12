@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -7,9 +7,12 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import { MdAdd } from "react-icons/md";
 import { useGetMeQuery } from "../../services/currentUserApi";
+import { logOut } from "../../features/auth/authSlice";
+
 export default function AcountDetails() {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  window.localStorage.setItem("userId", user._id);
+  window.localStorage.setItem("userId", user?._id);
   const userID = window.localStorage.getItem("userId");
   const { data, isLoading, isSuccess, isError } = useGetMeQuery(userID);
   //if you want to test add "62ec135c16eeaa1abda160b2"
@@ -68,6 +71,7 @@ export default function AcountDetails() {
             <div className='mb-5'>
               <Link
                 to='/login'
+                onClick={() => dispatch(logOut())}
                 className=' py-2 border border-neutral hover:bg-neutral hover:text-white text-center text-sm text-neutral-800  duration-300 mx-auto px-8'>
                 LogOut
               </Link>

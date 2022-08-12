@@ -1,41 +1,41 @@
-import { Formik, Form, FieldArray } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, FieldArray } from 'formik';
+import * as Yup from 'yup';
 
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import { Divider, Button as MuiButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { styled } from "@mui/material/styles";
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import { Divider, Button as MuiButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { styled } from '@mui/material/styles';
 
-import Textfield from "./FormsUI/Textfield";
-import ButtonSubmit from "./FormsUI/Button";
-import Colorfield from "./FormsUI/Colorfield";
-import ImageUpload from "./FormsUI/ImageUpload";
+import Textfield from './FormsUI/Textfield';
+import ButtonSubmit from './FormsUI/Button';
+import Colorfield from './FormsUI/Colorfield';
+import ImageUpload from './FormsUI/ImageUpload';
 
 import {
   useAddProductMutation,
   useUploadProductImagesMutation,
-} from "../services/productApi";
-import { useState } from "react";
-import { ValidationError } from "yup";
+} from '../services/productApi';
+import { useState } from 'react';
+import { ValidationError } from 'yup';
 
-const size = { size: "", count: "", price: "" };
+const size = { size: '', count: '', price: '' };
 const variant = {
-  color: "#000000",
+  color: '#000000',
   sizes: [{ ...size }],
   images: [],
 };
 
 const Button = styled(MuiButton)({
-  height: "56px",
+  height: '56px',
 });
 
 const INITIAL_FORM_STATE = {
-  brand: "",
-  title: "",
-  category: "",
-  description: "",
+  brand: '',
+  title: '',
+  category: '',
+  description: '',
   variants: [
     {
       ...variant,
@@ -44,24 +44,24 @@ const INITIAL_FORM_STATE = {
 };
 
 const FORM_VALIDATION = Yup.object().shape({
-  brand: Yup.string().required("Required"),
-  title: Yup.string().required("Required"),
-  category: Yup.string().required("Required"),
-  description: Yup.string().required("Required"),
+  brand: Yup.string().required('Required'),
+  title: Yup.string().required('Required'),
+  category: Yup.string().required('Required'),
+  description: Yup.string().required('Required'),
   variants: Yup.array(
     Yup.object({
-      color: Yup.string().required("Required"),
+      color: Yup.string().required('Required'),
       sizes: Yup.array(
         Yup.object({
-          size: Yup.string().required("Required"),
+          size: Yup.string().required('Required'),
           count: Yup.number()
             .integer()
-            .typeError("Please enter a valid price")
-            .required("Required"),
+            .typeError('Please enter a valid price')
+            .required('Required'),
           price: Yup.number()
             .integer()
-            .typeError("Please enter a valid price")
-            .required("Required"),
+            .typeError('Please enter a valid price')
+            .required('Required'),
         })
       )
         .min(1)
@@ -71,9 +71,9 @@ const FORM_VALIDATION = Yup.object().shape({
 
           if (hasDuplicates(sizes)) {
             return new ValidationError(
-              "Sizes must be unique",
+              'Sizes must be unique',
               undefined,
-              "sizes"
+              'sizes'
             );
           }
 
@@ -104,18 +104,15 @@ const AddProduct = () => {
             }}
             validationSchema={FORM_VALIDATION}
             onSubmit={async (values) => {
-              console.log(values);
               const fd = new FormData();
 
               images.forEach((image) => {
-                fd.append("images", image, image.uuid);
+                fd.append('images', image, image.uuid);
               });
               try {
                 await uploadImages(fd);
                 await addProduct({ ...values });
-              } catch (error) {
-                console.log(error);
-              }
+              } catch (error) {}
             }}
           >
             {({ values, errors }) => (
@@ -207,7 +204,7 @@ const AddProduct = () => {
                                           <Grid
                                             container
                                             spacing={2}
-                                            sx={{ alignItems: "center" }}
+                                            sx={{ alignItems: 'center' }}
                                           >
                                             <Grid item>
                                               <Button
@@ -222,7 +219,7 @@ const AddProduct = () => {
 
                                             <Grid item>
                                               {typeof errors.sizes ===
-                                              "string" ? (
+                                              'string' ? (
                                                 <Typography color="red">
                                                   {errors.sizes}
                                                 </Typography>

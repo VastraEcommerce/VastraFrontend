@@ -1,23 +1,22 @@
-import axios from "axios";
-import { Form, Formik } from "formik";
-import { BsFillBrushFill, BsFillKeyFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import * as Yup from "yup";
-import { updateVal } from "./slice";
+import axios from 'axios';
+import { Form, Formik } from 'formik';
+import { BsFillBrushFill, BsFillKeyFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { useSignUpMutation } from '../../../features/auth/authApiSlice';
 
 const SignUpSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required")
-    .trim("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required')
+    .trim('Required'),
   email: Yup.string()
-    .email("Invalid email")
-    .required("Required")
-    .trim("Required")
+    .email('Invalid email')
+    .required('Required')
+    .trim('Required')
 
-    .test("email", "We Have This Email", async (inputValue) => {
+    .test('email', 'We Have This Email', async (inputValue) => {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}api/v1/users/isExist`,
         { email: inputValue }
@@ -25,21 +24,21 @@ const SignUpSchema = Yup.object().shape({
       return !data.isExist;
     }),
   password: Yup.string()
-    .required("Please Enter your password")
-    .trim("Required")
+    .required('Please Enter your password')
+    .trim('Required')
     .matches(
       // eslint-disable-next-line
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
     ),
   confirmPass: Yup.string()
-    .required("Please Enter your confirm password")
-    .oneOf([Yup.ref("password")], "Password must match"),
+    .required('Please Enter your confirm password')
+    .oneOf([Yup.ref('password')], 'Password must match'),
 });
 
 export default function Register() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [signUp] = useSignUpMutation();
 
   // const updateStore = useDebouncedCallback((val) => {
   // dispatch(updateVal({ user, token }));
@@ -55,30 +54,16 @@ export default function Register() {
           <Formik
             validateOnChange={false}
             initialValues={{
-              name: "",
-              email: "",
-              password: "",
-              confirmPass: "",
+              name: '',
+              email: '',
+              password: '',
+              confirmPass: '',
             }}
             validationSchema={SignUpSchema}
-            onSubmit={(values) => {
-              axios
-                .post(
-                  `${process.env.REACT_APP_BASE_URL}api/v1/users/signup`,
-                  values
-                )
-                .then(
-                  ({
-                    data: {
-                      token,
-                      data: { user },
-                    },
-                  }) => {
-                    dispatch(updateVal({ user, token }));
-                    navigate("/");
-                  }
-                )
-                .catch((err) => console.log(err));
+            onSubmit={async (values) => {
+              console.log({ values });
+              await signUp(values);
+              navigate('/login');
             }}
           >
             {({
@@ -107,7 +92,7 @@ export default function Register() {
                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           style={{
                             borderColor:
-                              errors.name && touched.name ? "red" : "inherit",
+                              errors.name && touched.name ? 'red' : 'inherit',
                           }}
                           placeholder="Hassan Sabry"
                           required
@@ -151,7 +136,7 @@ export default function Register() {
                       bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           style={{
                             borderColor:
-                              errors.email && touched.email ? "red" : "inherit",
+                              errors.email && touched.email ? 'red' : 'inherit',
                           }}
                           required
                           placeholder="name@flowbite.com"
@@ -188,8 +173,8 @@ export default function Register() {
                           style={{
                             borderColor:
                               errors.password && touched.password
-                                ? "red"
-                                : "inherit",
+                                ? 'red'
+                                : 'inherit',
                           }}
                           required
                           name="password"
@@ -225,8 +210,8 @@ export default function Register() {
                           style={{
                             borderColor:
                               errors.confirmPass && touched.confirmPass
-                                ? "red"
-                                : "inherit",
+                                ? 'red'
+                                : 'inherit',
                           }}
                           required
                           name="confirmPass"
@@ -258,10 +243,10 @@ export default function Register() {
             }}
           </Formik>
           <div className=" text-white text-left mt-5">
-            I have an account need to{" "}
+            I have an account need to{' '}
             <a href="/login" className="underline decoration-1 text-blue-500 ">
               Login
-            </a>{" "}
+            </a>{' '}
           </div>
         </div>
       </div>

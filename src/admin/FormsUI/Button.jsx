@@ -2,10 +2,11 @@ import Button from "@mui/material/Button";
 import { useFormikContext } from "formik";
 
 const ButtonWrapper = ({ children, ...otherProps }) => {
-  const { submitForm } = useFormikContext();
+  const { submitForm, resetForm } = useFormikContext();
 
   const handleSubmit = () => {
     submitForm();
+    resetForm();
   };
 
   const configButton = {

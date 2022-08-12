@@ -28,9 +28,12 @@ const ImageUpload = ({ values, i, setImagesState }) => {
     // data for submit
     imageList.forEach((image) => {
       const ext = image.file.name.split(".").at(-1);
-      const imgUuid = uuidv4() + `.${ext}`;
+      const imgUuid = `${uuidv4()}.${ext}`;
       image.file.uuid = imgUuid;
-      values.variants[i].images = [...values.variants[i].images, imgUuid];
+      values.variants[i].images = [
+        ...values.variants[i].images,
+        `images/products/${imgUuid}`,
+      ];
     });
 
     console.log(imageList, addUpdateIndex);

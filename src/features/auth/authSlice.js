@@ -19,6 +19,8 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.persist = false;
+      localStorage.removeItem('persist');
+      localStorage.removeItem('accessToken');
     },
     setPersist: (state, action) => {
       state.persist = !state.persist;

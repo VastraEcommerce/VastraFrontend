@@ -3,7 +3,7 @@ import { logOut, setCredentials } from '../../features/auth/authSlice';
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: `${process.env.REACT_APP_BASE_URL}api/v1`,
-  // baseUrl: `http://localhost:5000/api/v1`, // for testing
+  // baseUrl: `http://localhost:5000/api/v1`, // for test
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;

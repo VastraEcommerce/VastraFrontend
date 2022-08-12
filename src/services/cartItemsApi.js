@@ -38,10 +38,10 @@ export const cartItemApi = apiSlice.injectEndpoints( {
       invalidatesTags: [ 'Cart' ],
     } ),
     updateCartItem: builder.mutation( {
-      query: ( id, updates ) => ( {
+      query: ( id, quantity ) => ( {
         url: `/cartItems/${ id }`,
         method: 'PATCH',
-        body: updates,
+        body: { quantity },
       } ),
       invalidatesTags: [ 'Cart' ],
     } ),

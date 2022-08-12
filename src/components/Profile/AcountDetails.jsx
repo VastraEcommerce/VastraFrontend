@@ -12,7 +12,7 @@ import { logOut } from "../../features/auth/authSlice";
 export default function AcountDetails() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  window.localStorage.setItem("userId", user._id);
+  window.localStorage.setItem("userId", user?._id);
   const userID = window.localStorage.getItem("userId");
   const { data, isLoading, isSuccess, isError } = useGetMeQuery(userID);
   //if you want to test add "62ec135c16eeaa1abda160b2"

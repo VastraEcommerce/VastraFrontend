@@ -88,7 +88,7 @@ const AddProduct = () => {
   const [uploadImages] = useUploadProductImagesMutation();
   const [addProduct] = useAddProductMutation();
 
-  const [images, setImages] = useState();
+  const [images, setImages] = useState([]);
   return (
     <Grid
       container

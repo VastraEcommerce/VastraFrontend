@@ -4,8 +4,8 @@ import { useFormikContext } from "formik";
 const ButtonWrapper = ({ children, ...otherProps }) => {
   const { submitForm, resetForm } = useFormikContext();
 
-  const handleSubmit = () => {
-    submitForm();
+  const handleSubmit = async () => {
+    await submitForm();
     resetForm();
   };
 

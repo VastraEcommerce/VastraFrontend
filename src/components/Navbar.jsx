@@ -4,8 +4,10 @@ import { HiMenuAlt2 } from "react-icons/hi";
 import { Logo } from "./Logo";
 import { Link } from "react-router-dom";
 import Accordion from "./Accordion";
-
+import { useGetAllCartItemsForCurrentUserQuery } from ".././services/cartItemsApi";
 const Navbar = (props) => {
+  const { data, isSuccess } = useGetAllCartItemsForCurrentUserQuery();
+
   return (
     <>
       {/* Drawer */}
@@ -104,7 +106,11 @@ const Navbar = (props) => {
                   <div className='indicator'>
                     <Link to='/cart'>
                       <HiOutlineShoppingCart className='text-2xl' />
-                      <span className='badge badge-sm indicator-item'>8</span>
+                      {isSuccess && (
+                        <span className='badge badge-sm indicator-item'>
+                          {data.length}
+                        </span>
+                      )}
                     </Link>
                   </div>
                 </label>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { cityData } from "../address/citys";
+
 export default function CartTotal() {
   const [zip, setZip] = useState("");
   const [calc, setCalc] = useState(false);

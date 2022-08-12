@@ -90,11 +90,9 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="text-center p-3  bg-slate-700  text-white my-2 rounded-md">
-        LogIn
-      </h1>
-      <div className="w-full md:w-96 md:max-w-full mx-auto">
-        <div className="p-6 border border-gray-300 sm:rounded-md  dark:bg-gray-700">
+      <div className="w-full md:w-96 md:max-w-full mx-auto ">
+        <div className="p-6 border border-gray-300 sm:rounded-md  dark:bg-gray-700 my-8 drop-shadow-xl">
+          <h1 className="text-white text-2xl font-bold header">LogIn</h1>
           <Formik
             initialValues={{
               email: "",
@@ -194,10 +192,11 @@ export default function Login() {
                         </p>
                       ) : null}
                     </label>
+                    {/* Remember me */}
                     <label className="label label-text justify-start gap-x-1 text-sm font-medium text-gray-900 dark:text-gray-300">
                       <input
                         type="checkbox"
-                        className="checkbox checkbox-primary bg-white checkbox-sm
+                        className="checkbox checkbox-primary   bg-white checkbox-sm
                         "
                         onChange={() => dispatch(setPersist())}
                         checked={persist}
@@ -228,7 +227,7 @@ export default function Login() {
           </Formik>
           <div className="text-center">
             <button
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-3 btn"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-3 btn "
               onClick={forgetPasswordApi}
             >
               Forget Password

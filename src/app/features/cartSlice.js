@@ -1,14 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
-const initialState = [];
+// const DeleteAdress = ( arrayOfAddress ) => {
+//     const addressArray = arrayOfAddress.filter( ( object ) => {
+//         return object._id !== thisAddress._id;
+//     } );
+// }
+const initialState = {
+    pretotal: 0,
+    currentTotal: 0
+};
 export const cartSlice = createSlice( {
-    name: 'shoppingBag',
+    name: 'TotalPrice',
     initialState,
     reducers: {
-        addProduct: ( state, product ) => {
-            state.push( product )
+        calcToTalPrice: ( state, total ) => {
+            // state.pretotal = total
+            // state.currentTotal = state.pretotal + total
+
         }
     }
 } )
-export const { addProduct } = cartSlice.actions;
+export const { calcToTalPrice } = cartSlice.actions;

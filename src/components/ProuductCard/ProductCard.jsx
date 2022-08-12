@@ -1,34 +1,69 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { BiShoppingBag } from "react-icons/bi";
 import { BsSuitHeart } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 import RatStars from "../Product/RateStars";
 import SwitchColors from "../Product/SwitchColors";
 import SwitchSizes from "../Product/SwitchSizes";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../app/features/cartSlice";
+
+import { useEffect, useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAddCartItemMutation } from "../../services/cartItemsApi";
 
 export default function ProductCard({ productInfo }) {
-  const dispatch = useDispatch();
-  const addProductToBag = () => {
-    dispatch(addProduct(productInfo));
-  };
-  const variants = productInfo.variants.filter(
-    (varient) => varient.sizes.length > 0
+  const [addCartItem] = useAddCartItemMutation();
+
+  console.log({ productInfo });
+
+  const [variant, setVariant] = useState(() => productInfo?.variants[0]);
+  const [size, setSize] = useState(variant?.sizes[0]);
+  const [color, setColor] = useState(variant?.color);
+
+  console.log(size);
+
+  const colors = useMemo(
+    () => productInfo?.variants?.map((variant) => variant.color),
+    [productInfo]
   );
-  const colors = variants.map((variant) => variant.color);
 
-  const [color, setColor] = useState(colors[0]);
+  useEffect(() => {
+    const variant = productInfo?.variants?.find(
+      (variant) => variant?.color === color
+    );
+    setVariant(variant);
+    setSize(variant?.sizes[0]);
+  }, [color, productInfo?.variants]);
 
-  const sizes = variants.find((variant) => variant.color === color).sizes;
+  useEffect(() => {
+    setVariant(productInfo?.variants[0]);
+    setColor(productInfo?.variants[0]?.color);
+    setSize(productInfo?.variants[0]?.sizes[0]);
+  }, [productInfo]);
 
-  const [size, setSize] = useState(sizes[0]);
   const navigate = useNavigate();
 
+  const [bagVarient, setBagVarient] = useState({
+    productId: productInfo._id,
+    title: productInfo.title,
+    description: productInfo.description,
+    brand: productInfo.brand,
+    size: size.size,
+    price: size.price,
+    image: variant.images[0],
+    quantity: 1,
+  });
+  const addProductToBag = async() => {
+    setBagVarient({
+      ...bagVarient,
+      price: size?.price,
+      size: size.size,
+      image: variant?.images[0],
+    });
+    await addCartItem(bagVarient);
+  };
+
   return (
-    // <div className="container py-5 border border-rose-600">
     <div className='card my-5 mx-3 max-w-[270px] bg-white drop-shadow-md rounded-lg'>
-      {/* // TODO عبده بقولك هاندل انت تغير الصورة اما الفاريت يتغير */}
       <img
         className='object-cover rounded-tl-lg rounded-tr-lg cursor-pointer'
         src={`${process.env.REACT_APP_BASE_URL}${productInfo.variants[0].images[0]}`}
@@ -46,7 +81,7 @@ export default function ProductCard({ productInfo }) {
           </p>
         </div>
         <p className='space-x-2 mt-1'>
-          <span className='text-xl'>{size.size}</span>
+          <span className='text-xl'>${size?.price}</span>
         </p>
         <div className='colors flex justify-between w-[100%] mt-3 mb-4'>
           <SwitchColors
@@ -58,9 +93,9 @@ export default function ProductCard({ productInfo }) {
         </div>
         <div className='productSize flex justify-between w-[100%] text-center mb-4'>
           <SwitchSizes
-            sizes={sizes}
+            sizes={variant?.sizes}
             onChangeSizeStateHandler={setSize}
-            currentSizeState={size}
+            currentSizeState={size.size}
             boxSize={"0.5rem"}
           />
         </div>

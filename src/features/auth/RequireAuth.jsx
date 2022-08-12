@@ -11,14 +11,8 @@ export const roles = {
 const RequireAuth = ({ allowedRoles = [] }) => {
   const location = useLocation();
   const token = useSelector(selectCurrentToken);
-  console.log({ allowedRoles });
-  console.log({ token });
-
   const decoded = token ? jwt_decode(token) : undefined;
   const role = decoded?.role || '';
-
-  console.log({ token });
-  console.log({ role });
 
   return token ? (
     allowedRoles?.includes(role) ? (

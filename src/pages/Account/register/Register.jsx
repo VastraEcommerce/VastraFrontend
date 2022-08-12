@@ -61,7 +61,6 @@ export default function Register() {
             }}
             validationSchema={SignUpSchema}
             onSubmit={async (values) => {
-              console.log({ values });
               await signUp(values);
               navigate('/login');
             }}

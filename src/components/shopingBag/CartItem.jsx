@@ -17,7 +17,6 @@ export default function CartItem({ product }) {
   const dispatch = useDispatch();
   const handleBlur = async () => {
     await updateCartItem({ id: product._id, quantity: quntity });
-    console.log(quntity);
     dispatch(calcToTalPrice(total));
   };
   const handleChange = (event) => {

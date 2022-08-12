@@ -17,7 +17,6 @@ const Products = () => {
     setValue(newValue);
   };
 
-  // console.log(products);
   return (
     <>
       <Box sx={{ width: "100%", typography: "body1" }}>

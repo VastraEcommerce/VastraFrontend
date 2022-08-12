@@ -16,16 +16,10 @@ export const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  console.log('wrapper');
-  console.log(result?.error?.status === 403);
-  console.log({ result });
-  console.log({ isPersist: api.getState().auth.persist });
 
   if (result?.error?.status === 403) {
-    console.log(`sending refresh token`);
     // send refresh token to get new access token
     const refreshResult = await baseQuery('/users/refresh', api, extraOptions);
-    console.log({ refreshResult });
     if (refreshResult?.data) {
       const user = api.getState().auth.user;
 

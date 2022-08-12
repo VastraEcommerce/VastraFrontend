@@ -36,7 +36,6 @@ const ImageUpload = ({ values, i, setImagesState }) => {
       ];
     });
 
-    console.log(imageList, addUpdateIndex);
     setImagesState(imageList.map((image) => image.file));
     setImages(imageList);
   };

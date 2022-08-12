@@ -12,11 +12,12 @@ import {
 export default function Product({ product }) {
   const [removeCartItem] = useRemoveCartItemMutation();
   const [updateCartItem] = useUpdateCartItemMutation();
-  const [quntity, setQuntity] = useState("1");
+  const [quntity, setQuntity] = useState(product.quantity);
   const total = product.price * quntity;
   const dispatch = useDispatch();
   const handleBlur = async (event) => {
     await updateCartItem(product._id, { quantity: quntity });
+    console.log(quntity);
     dispatch(calcToTalPrice(total));
   };
   const handleChange = (event) => {
@@ -50,16 +51,19 @@ export default function Product({ product }) {
         </div>
       </td>
       <td>
+        <p className='text-xm md:text-sm'>{product.size}</p>
+      </td>
+      <td>
         <p className='text-xm md:text-sm'>${product.price}</p>
       </td>
       <td>
         {" "}
         <input
           type='number'
-          // min='1'
-          // max='100'
+          min='1'
+          max='100'
+          defaultValue={quntity}
           className='px-5 border border-slate-300 outline-none text-sm text-nuteral-800 hover:bg-white focus:bg-white shadow-sm   w-full p-2.5  bg-base-200  dark:placeholder-gray-400   '
-          placeholder='1'
           name='quntity'
           onBlur={handleBlur}
           onChange={handleChange}

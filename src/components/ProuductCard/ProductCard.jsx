@@ -5,13 +5,13 @@ import { BsSuitHeart } from "react-icons/bs";
 import RatStars from "../Product/RateStars";
 import SwitchColors from "../Product/SwitchColors";
 import SwitchSizes from "../Product/SwitchSizes";
-import { useDispatch } from "react-redux";
-import { addProduct } from "../../app/features/cartSlice";
+
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAddCartItemMutation } from "../../services/cartItemsApi";
 
 export default function ProductCard({ productInfo }) {
-  const dispatch = useDispatch();
+  const [addCartItem] = useAddCartItemMutation();
 
   console.log({ productInfo });
 
@@ -52,21 +52,18 @@ export default function ProductCard({ productInfo }) {
     image: variant.images[0],
     quantity: 1,
   });
-  const addProductToBag = () => {
+  const addProductToBag = async() => {
     setBagVarient({
       ...bagVarient,
       price: size?.price,
       size: size.size,
       image: variant?.images[0],
     });
-    dispatch(addProduct(bagVarient));
+    await addCartItem(bagVarient);
   };
-  console.log(bagVarient);
-  // console.log(bagVarient);
+
   return (
-    // <div className="container py-5 border border-rose-600">
     <div className='card my-5 mx-3 max-w-[270px] bg-white drop-shadow-md rounded-lg'>
-      {/* // TODO عبده بقولك هاندل انت تغير الصورة اما الفاريت يتغير */}
       <img
         className='object-cover rounded-tl-lg rounded-tr-lg cursor-pointer'
         src={`${process.env.REACT_APP_BASE_URL}${productInfo.variants[0].images[0]}`}

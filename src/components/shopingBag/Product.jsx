@@ -1,20 +1,31 @@
 import React, { useState } from "react";
-// import productImage from "../../images/women.png";
+
 import { RiDeleteBinLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteProduct } from "../../app/features/cartSlice";
+import { useNavigate } from "react-router-dom";
+import { calcToTalPrice } from "../../app/features/cartSlice";
+import {
+  useRemoveCartItemMutation,
+  useUpdateCartItemMutation,
+} from "../../services/cartItemsApi";
+
 export default function Product({ product }) {
-  const dispatch = useDispatch();
+  const [removeCartItem] = useRemoveCartItemMutation();
+  const [updateCartItem] = useUpdateCartItemMutation();
   const [quntity, setQuntity] = useState("1");
-  const handleValue = (event) => {
+  const total = product.price * quntity;
+  const dispatch = useDispatch();
+  const handleBlur = async (event) => {
+    await updateCartItem(product._id, { quantity: quntity });
+    dispatch(calcToTalPrice(total));
+  };
+  const handleChange = (event) => {
     setQuntity(event.target.value);
   };
-  const handelDeleteProduct = (event) => {
-    dispatch(deleteProduct(product));
-    console.log(event.target);
+  const handelDeleteProduct = async (event) => {
+    await removeCartItem(product._id);
   };
-  const total = product.price * quntity;
+
   const navigate = useNavigate();
   return (
     <tr>
@@ -45,12 +56,13 @@ export default function Product({ product }) {
         {" "}
         <input
           type='number'
-          min='1'
-          max='100'
+          // min='1'
+          // max='100'
           className='px-5 border border-slate-300 outline-none text-sm text-nuteral-800 hover:bg-white focus:bg-white shadow-sm   w-full p-2.5  bg-base-200  dark:placeholder-gray-400   '
           placeholder='1'
           name='quntity'
-          onChange={handleValue}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
       </td>
       <td>

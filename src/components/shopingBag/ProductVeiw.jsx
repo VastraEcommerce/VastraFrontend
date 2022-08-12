@@ -1,11 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 import Product from "./Product";
 
-export default function ProductVeiw() {
-  const shoppingBaag = useSelector((state) => state.shoppingBag);
-  console.log(shoppingBaag);
+export default function ProductVeiw({ data }) {
   return (
     <div className='py-8 sm:px-5 w-[100%]'>
       <table className='table text-neutral table-normal w-[100%]'>
@@ -18,8 +15,8 @@ export default function ProductVeiw() {
           </tr>
         </thead>
         <tbody>
-          {shoppingBaag.map((product, index) => {
-            return <Product product={product.payload} key={index} />;
+          {data.map((product, index) => {
+            return <Product product={product} key={index} />;
           })}
         </tbody>
       </table>

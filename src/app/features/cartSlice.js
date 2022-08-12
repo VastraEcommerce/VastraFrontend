@@ -5,22 +5,19 @@ import { createSlice } from "@reduxjs/toolkit";
 //         return object._id !== thisAddress._id;
 //     } );
 // }
-const initialState = [];
+const initialState = {
+    pretotal: 0,
+    currentTotal: 0
+};
 export const cartSlice = createSlice( {
-    name: 'shoppingBag',
+    name: 'TotalPrice',
     initialState,
     reducers: {
-        addProduct: ( state, product ) => {
-            state.push( product )
-            console.log( state )
-        },
-        deleteProduct: ( state, product ) => {
-            const NewState = state.filter( obj => {
-                return obj.payload._id !== product._id
-            } )
-            console.log( NewState )
-            state = [ ...NewState ]
+        calcToTalPrice: ( state, total ) => {
+            // state.pretotal = total
+            // state.currentTotal = state.pretotal + total
+
         }
     }
 } )
-export const { addProduct, deleteProduct } = cartSlice.actions;
+export const { calcToTalPrice } = cartSlice.actions;

@@ -1,14 +1,12 @@
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import SellIcon from "@mui/icons-material/Sell";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import { Link } from "react-router-dom";
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PeopleIcon from '@mui/icons-material/People';
+import SellIcon from '@mui/icons-material/Sell';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <>

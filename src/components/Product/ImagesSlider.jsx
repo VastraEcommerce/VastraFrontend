@@ -5,7 +5,7 @@ export default function ImagesSlider({ images = [] }) {
   const [zoomStyle, setZoomStyle] = useState({
     backgroundImage: 'none',
     backgroundPosition: '0% 0%',
-    backgroundSize: '150% 150%',
+    backgroundSize: '175% 175%',
   });
 
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function ImagesSlider({ images = [] }) {
             <img
               src={`${process.env.REACT_APP_BASE_URL}${activeImage}`}
               alt=""
-              className="block pointer-events-none group-hover:opacity-0 object-center md:object-left-top object-contain w-full h-full lg:w-5/6 lg:h-3/4 xl:w-11/12 xl:h-5/6"
+              className="block pointer-events-none group-hover:opacity-0 object-center md:object-left-top object-contain w-full h-full"
             />
           </figure>
         </div>

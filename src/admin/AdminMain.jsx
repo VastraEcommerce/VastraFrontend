@@ -1,6 +1,8 @@
-import { AppBar, Divider, List, Toolbar, Box } from "@mui/material";
+import { AppBar, Divider, List, Toolbar, Box, Button } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { mainListItems, secondaryListItems } from "./List";
+import { logOut } from "../features/auth/authSlice";
+import LogoutConfirm from "./LogoutConfirm";
 
 const AdminMain = () => {
   return (
@@ -21,7 +23,16 @@ const AdminMain = () => {
         >
           {mainListItems}
           <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          {/* {secondaryListItems} */}
+          <LogoutConfirm />
+          {/* <Button
+            startIcon={<LogoutIcon />}
+            onClick={() => {
+              dispatch(logOut());
+            }}
+          >
+            Log Out
+          </Button> */}
         </List>
         <Divider sx={{ mx: 1 }} orientation="vertical" flexItem />
 

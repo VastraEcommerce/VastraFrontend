@@ -1,8 +1,7 @@
-import { AppBar, Divider, List, Toolbar, Box, Button } from "@mui/material";
-import { Outlet } from "react-router-dom";
-import { mainListItems, secondaryListItems } from "./List";
-import { logOut } from "../features/auth/authSlice";
-import LogoutConfirm from "./LogoutConfirm";
+import { AppBar, Box, Divider, List, Toolbar } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import { mainListItems } from './List';
+import LogoutConfirm from './LogoutConfirm';
 
 const AdminMain = () => {
   return (
@@ -10,15 +9,15 @@ const AdminMain = () => {
       <AppBar position="static">
         <Toolbar>Dashboard</Toolbar>
       </AppBar>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: 'flex' }}>
         {/* Sidebar */}
         <List
           component="nav"
           sx={{
-            flex: "none",
+            flex: 'none',
             width: 250,
-            py: "20px",
-            height: "calc(100vh - 64px)",
+            py: '20px',
+            height: 'calc(100vh - 64px)',
           }}
         >
           {mainListItems}

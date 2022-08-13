@@ -1,24 +1,21 @@
+import { Route, Routes } from 'react-router-dom';
+import AdminMain from './admin/AdminMain';
+import AdminLogin from './admin/pages/AdminLogin';
+import Customers from './admin/pages/Customers';
+import Orders from './admin/pages/Orders';
+import Products from './admin/pages/Products';
+import Layout from './components/Layout';
+import RequireAuth, { roles } from './features/auth/RequireAuth';
 import About from './pages/About';
 import Login from './pages/Account/login/Login';
 import Register from './pages/Account/register/Register';
 import Address from './pages/Address';
 import Contact from './pages/Contact';
-import ShoppingBag from './pages/ShopingBag';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import ProductDetails from './pages/ProductDetails';
 import Profile from './pages/Profile';
-import { Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import RequireAuth, { roles } from './features/auth/RequireAuth';
-import UserList from './test/UserList'; // for testing onley it will be removed
-import Welcome from './test/Welcome'; // for testing onley it will be removed
-import AdminMain from './admin/AdminMain';
-import AdminLogin from './admin/pages/AdminLogin';
-import Products from './admin/pages/Products';
-import Dashboard from './admin/pages/Dashboard';
-import Customers from './admin/pages/Customers';
-import Orders from './admin/pages/Orders';
-import NotFound from './pages/NotFound';
+import ShoppingBag from './pages/ShopingBag';
 
 function App() {
   return (

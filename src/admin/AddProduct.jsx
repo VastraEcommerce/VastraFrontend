@@ -117,7 +117,7 @@ const AddProduct = () => {
           >
             {({ values, errors }) => (
               <Form>
-                <pre>{JSON.stringify({ values, errors }, undefined, 2)}</pre>
+                {/* <pre>{JSON.stringify({ values, errors }, undefined, 2)}</pre> */}
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Typography>Product details</Typography>

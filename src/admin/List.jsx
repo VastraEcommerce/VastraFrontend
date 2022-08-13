@@ -21,7 +21,7 @@ export const mainListItems = (
       </ListItemButton>
     </Link> */}
 
-    <Link to="products">
+    <Link to="">
       <ListItemButton>
         <ListItemIcon>
           <SellIcon />

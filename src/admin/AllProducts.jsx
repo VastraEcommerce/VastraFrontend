@@ -38,8 +38,8 @@ function Row(props) {
           {row.title}
         </TableCell>
 
-        <TableCell align="right">{row.brand}</TableCell>
-        <TableCell align="right">{row.category}</TableCell>
+        <TableCell>{row.brand}</TableCell>
+        <TableCell>{row.category}</TableCell>
         <TableCell align="right">{row.ratingsAverage}</TableCell>
         <TableCell align="right">
           <AlertDialog id={row._id} />
@@ -59,7 +59,7 @@ function Row(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell>Color</TableCell>
-                    <TableCell>Size</TableCell>
+                    <TableCell align="right">Size</TableCell>
                     <TableCell align="right">Stock</TableCell>
                     <TableCell align="right">Price ($)</TableCell>
                   </TableRow>
@@ -83,7 +83,7 @@ function Row(props) {
                             {" "}
                           </div>
                         </TableCell>
-                        <TableCell>{size.size}</TableCell>
+                        <TableCell align="right">{size.size}</TableCell>
                         <TableCell align="right">{size.count}</TableCell>
                         <TableCell align="right">{size.price}</TableCell>
                       </TableRow>
@@ -109,10 +109,10 @@ export default function AllProducts({ products }) {
             <TableCell>
               <Typography variant="h5">Title</Typography>
             </TableCell>
-            <TableCell align="right">
+            <TableCell>
               <Typography variant="h5">Brand</Typography>
             </TableCell>
-            <TableCell align="right">
+            <TableCell>
               <Typography variant="h5">Categories</Typography>
             </TableCell>
             <TableCell align="right">

@@ -1,41 +1,19 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
-  };
-}
+import AlertDialog from "./DeleteConfirm";
 
 function Row(props) {
   const { row } = props;
@@ -44,7 +22,7 @@ function Row(props) {
   return (
     <>
       {/* Accordion Head */}
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         {/* Accordion Button */}
         <TableCell>
           <IconButton
@@ -63,6 +41,9 @@ function Row(props) {
         <TableCell align="right">{row.brand}</TableCell>
         <TableCell align="right">{row.category}</TableCell>
         <TableCell align="right">{row.ratingsAverage}</TableCell>
+        <TableCell align="right">
+          <AlertDialog id={row._id} />
+        </TableCell>
       </TableRow>
 
       {/* Accordion Body */}
@@ -93,12 +74,13 @@ function Row(props) {
                           <div
                             style={{
                               backgroundColor: variant.color,
-                              width: '20px',
-                              height: '20px',
-                              borderRadius: '50%',
+                              width: "20px",
+                              height: "20px",
+                              borderRadius: "50%",
+                              border: "0.5px solid grey",
                             }}
                           >
-                            {' '}
+                            {" "}
                           </div>
                         </TableCell>
                         <TableCell>{size.size}</TableCell>
@@ -117,32 +99,6 @@ function Row(props) {
   );
 }
 
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     calories: PropTypes.number.isRequired,
-//     carbs: PropTypes.number.isRequired,
-//     fat: PropTypes.number.isRequired,
-//     history: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         amount: PropTypes.number.isRequired,
-//         customerId: PropTypes.string.isRequired,
-//         date: PropTypes.string.isRequired,
-//       })
-//     ).isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     protein: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
-
 export default function AllProducts({ products }) {
   return (
     <TableContainer component={Paper}>
@@ -154,6 +110,8 @@ export default function AllProducts({ products }) {
             <TableCell align="right">Brand</TableCell>
             <TableCell align="right">Categories</TableCell>
             <TableCell align="right">Rating</TableCell>
+            {/* <TableCell align="right">Edit</TableCell> */}
+            <TableCell align="right">Delete</TableCell>
           </TableRow>
         </TableHead>
 

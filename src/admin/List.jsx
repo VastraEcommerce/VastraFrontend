@@ -12,14 +12,14 @@ import { Link } from "react-router-dom";
 
 export const mainListItems = (
   <>
-    <Link to="">
+    {/* <Link to="">
       <ListItemButton>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Dashboard" />
       </ListItemButton>
-    </Link>
+    </Link> */}
 
     <Link to="products">
       <ListItemButton>
@@ -48,14 +48,14 @@ export const mainListItems = (
       </ListItemButton>
     </Link>
 
-    <Link to="reports">
+    {/* <Link to="reports">
       <ListItemButton>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
         <ListItemText primary="Reports" />
       </ListItemButton>
-    </Link>
+    </Link> */}
   </>
 );
 

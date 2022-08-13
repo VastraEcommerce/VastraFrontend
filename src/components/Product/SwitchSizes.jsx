@@ -14,7 +14,7 @@ export default function SwitchSizes({
       {sizes?.map((z) => (
         <button
           key={z.size}
-          className={`btn btn-xs btn-outline rounded-none font-normal min-h-0 h-[auto] p-2 border border-gray-300 text-gray-600 hover:text-white`}
+          className={`btn btn-xs btn-outline btn-square rounded-none font-normal min-h-0 h-[auto] p-4 border border-gray-300 text-gray-600 hover:text-white`}
           onClick={() => onChangeSizeStateHandler(z)}
           style={{
             padding: boxSize,

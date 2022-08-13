@@ -76,7 +76,7 @@ export default function Login() {
   }, [error, isError]);
 
   useEffect(() => {
-    if (isSuccess) navigate('/welcome');
+    if (isSuccess) navigate('/');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 

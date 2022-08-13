@@ -106,12 +106,22 @@ export default function AllProducts({ products }) {
         <TableHead>
           <TableRow>
             <TableCell></TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell align="right">Brand</TableCell>
-            <TableCell align="right">Categories</TableCell>
-            <TableCell align="right">Rating</TableCell>
+            <TableCell>
+              <Typography variant="h5">Title</Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography variant="h5">Brand</Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography variant="h5">Categories</Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography variant="h5">Rating</Typography>
+            </TableCell>
             {/* <TableCell align="right">Edit</TableCell> */}
-            <TableCell align="right">Delete</TableCell>
+            <TableCell align="right">
+              <Typography variant="h5">Delete</Typography>
+            </TableCell>
           </TableRow>
         </TableHead>
 

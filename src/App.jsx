@@ -23,13 +23,16 @@ import NotFound from './pages/NotFound';
 function App() {
   return (
     <Routes>
-      <Route path="/admin">
-        <Route path="login" element={<AdminLogin />} />
-        <Route element={<AdminMain />}>
-          <Route index element={<Dashboard />} />
-          <Route path="products" element={<Products />} />
-          <Route path="customers" element={<Customers />} />
-          <Route path="orders" element={<Orders />} />
+      <Route element={<RequireAuth allowedRoles={[roles.ADMIN]} />}>
+        <Route path="/admin">
+          <Route path="login" element={<AdminLogin />} />
+          <Route element={<AdminMain />}>
+            {/* <Route element={<Dashboard />} /> */}
+            {/* <Route index path="products" element={<Products />} /> */}
+            <Route index element={<Products />} />
+            <Route path="customers" element={<Customers />} />
+            <Route path="orders" element={<Orders />} />
+          </Route>
         </Route>
       </Route>
       <Route path="/" element={<Layout />}>
@@ -53,10 +56,6 @@ function App() {
             <Route path="address" element={<Address />} />
           </Route>
           <Route path="cart" element={<ShoppingBag />} />
-        </Route>
-
-        <Route element={<RequireAuth allowedRoles={[roles.ADMIN]} />}>
-          <Route path="userslist" element={<UserList />} />
         </Route>
 
         <Route

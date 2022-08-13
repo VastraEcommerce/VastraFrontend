@@ -1,20 +1,12 @@
 import { useState } from "react";
 import ImageUploading from "react-images-uploading";
-import {
-  Divider,
-  Button,
-  Stack,
-  Box,
-  Card,
-  CardActions,
-  CardMedia,
-} from "@mui/material";
+import { Divider, Button, Stack, Box } from "@mui/material";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 import DeleteIcon from "@mui/icons-material/Delete";
 // import Button from "./Button";
 import { v4 as uuidv4 } from "uuid";
 
-import { styled } from "@mui/material/styles";
+// import { styled } from "@mui/material/styles";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 // const Button = styled(MuiButton)({
@@ -36,7 +28,11 @@ const ImageUpload = ({ values, i, setImagesState }) => {
       ];
     });
 
-    setImagesState(imageList.map((image) => image.file));
+    console.log(imageList, addUpdateIndex);
+    setImagesState((prevState) => [
+      ...prevState,
+      ...imageList.map((image) => image.file),
+    ]);
     setImages(imageList);
   };
 

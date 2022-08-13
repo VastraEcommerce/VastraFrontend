@@ -1,21 +1,22 @@
-import { Route, Routes } from 'react-router-dom';
-import AdminMain from './admin/AdminMain';
-import AdminLogin from './admin/pages/AdminLogin';
-import Customers from './admin/pages/Customers';
-import Orders from './admin/pages/Orders';
-import Products from './admin/pages/Products';
-import Layout from './components/Layout';
-import RequireAuth, { roles } from './features/auth/RequireAuth';
-import About from './pages/About';
-import Login from './pages/Account/login/Login';
-import Register from './pages/Account/register/Register';
-import Address from './pages/Address';
-import Contact from './pages/Contact';
-import Home from './pages/Home';
-import NotFound from './pages/NotFound';
-import ProductDetails from './pages/ProductDetails';
-import Profile from './pages/Profile';
-import ShoppingBag from './pages/ShopingBag';
+import { Route, Routes } from "react-router-dom";
+import AdminMain from "./admin/AdminMain";
+import AdminLogin from "./admin/pages/AdminLogin";
+import Customers from "./admin/pages/Customers";
+import Orders from "./admin/pages/Orders";
+import Products from "./admin/pages/Products";
+import Layout from "./components/Layout";
+import RequireAuth, { roles } from "./features/auth/RequireAuth";
+import About from "./pages/About";
+import Login from "./pages/Account/login/Login";
+import Register from "./pages/Account/register/Register";
+import Address from "./pages/Address";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import ProductDetails from "./pages/ProductDetails";
+import Profile from "./pages/Profile";
+import ShoppingBag from "./pages/ShopingBag";
+import OrderDetails from "./pages/OrderDetails";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="profile">
             <Route index element={<Profile />} />
             <Route path="address" element={<Address />} />
+            <Route path="orders/:id" element={<OrderDetails />} />
           </Route>
           <Route path="cart" element={<ShoppingBag />} />
         </Route>

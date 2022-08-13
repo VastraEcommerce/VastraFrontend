@@ -18,6 +18,7 @@ import Products from "./admin/pages/Products";
 import Dashboard from "./admin/pages/Dashboard";
 import Customers from "./admin/pages/Customers";
 import Orders from "./admin/pages/Orders";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       </Route>
       <Route path="/" element={<Layout />}>
         {/* Puplic Routes */}
+
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
@@ -60,9 +62,10 @@ function App() {
         <Route
           element={<RequireAuth allowedRoles={[roles.ADMIN, roles.USER]} />}
         >
-          <Route path="welcome" element={<Welcome />} />
+          <Route path="/" />
         </Route>
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
